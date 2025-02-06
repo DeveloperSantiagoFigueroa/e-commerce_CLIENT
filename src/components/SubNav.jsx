@@ -1,5 +1,4 @@
 import React from 'react';
-
 const SubNav = () => {
     return (
         <div className="hidden -mt-1 bg-gradient-to-b from-[#2b2b7b] to-[#1b1b51] md:flex justify-center gap-25 p-4 text-white font-medium">
