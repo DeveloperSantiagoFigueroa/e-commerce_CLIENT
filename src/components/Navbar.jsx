@@ -61,7 +61,7 @@ const Navbar = () => {
             </div>
 
             <div className="right flex gap-7 relative">
-                <i className="hidden md:block bi bi-person-circle text-white text-[35px]"></i>
+                <i className="hidden md:block bi bi-person-circle text-white text-[35px] cursor-pointer hover:text-[#ff2ed4] transition-all"></i>
 
                 <div className="relative hidden md:block">
                     <p
@@ -72,7 +72,7 @@ const Navbar = () => {
                         {/* //TODO: Terminar esto */}
                         {favouriteAmount}
                     </p>
-                    <i className="hidden md:block bi bi-heart text-white text-[35px]"></i>
+                    <i className="hidden md:block bi bi-heart text-white text-[35px] cursor-pointer hover:text-[#ff2ed4] transition-all"></i>
                 </div>
 
                 <div className="relative">
@@ -84,7 +84,7 @@ const Navbar = () => {
                         {/* //TODO: Terminar esto */}
                         {cartAmount}
                     </p>
-                    <i className="bi bi-cart text-white text-[35px]"></i>
+                    <i className="bi bi-cart text-white text-[35px] cursor-pointer hover:text-[#ff2ed4] transition-all"></i>
                 </div>
             </div>
         </div>
