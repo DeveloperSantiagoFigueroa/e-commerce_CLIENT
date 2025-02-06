@@ -22,16 +22,16 @@ const MobileMenu = ({ isOpen, onClose }) => {
                     </div>
 
                     {/* Opciones del menú */}
-                    <ul className="flex flex-col text-start ml-10 gap-6 text-[20px]">
-                        <Link to="/carrito">Carrito</Link>
-                        <Link to="/favoritos">Favoritos</Link>
-                        <Link to="/mis-compras">Mis compras</Link>
-                        <Link to="/destacado">Destacado</Link>
-                        <Link to="/contacto">Contacto</Link>
-                        <Link to="/ayuda">Ayuda</Link>
-                        <Link to="/ingresar">Ingresar</Link>
-                        <Link to="/registro">Crear cuenta</Link>
-                        <Link to="/envios">Envíos</Link>
+                    <ul className="flex flex-col text-start ml-10 gap-6 text-[20px] -mt-6">
+                        <Link to="/carrito"><i class="bi bi-cart4 text-[20px] mr-2"></i>Carrito</Link>
+                        <Link to="/favoritos"><i class="bi bi-bag-heart text-[20px] mr-2"></i>Favoritos</Link>
+                        <Link to="/mis-compras"><i class="bi bi-wallet2 text-[20px] mr-2"></i>Mis compras</Link>
+                        <Link to="/destacado"><i class="bi bi-stars text-[20px] mr-2"></i>Destacado</Link>
+                        <Link to="/contacto"><i class="bi bi-telephone text-[20px] mr-2"></i>Contacto</Link>
+                        <Link to="/ayuda"><i class="bi bi-info-circle text-[20px] mr-2"></i>Ayuda</Link>
+                        <Link to="/ingresar"><i class="bi bi-box-arrow-in-right text-[20px] mr-2"></i>Ingresar</Link>
+                        <Link to="/registro"><i class="bi bi-person-plus text-[20px] mr-2"></i>Crear cuenta</Link>
+                        <Link to="/envios"><i class="bi bi-truck text-[20px] mr-2"></i>Envíos</Link>
                         
                         <div className='flex flex-col text-gray-400 text-[15px] gap-5 border-t-1 border-gray-600 mr-10'>
                             <Link to="/reestablecer-contraseña" className='mt-6'>Ólvide mi contraseña</Link>
