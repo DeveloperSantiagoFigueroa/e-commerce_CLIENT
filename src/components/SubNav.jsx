@@ -11,7 +11,7 @@ const SubNav = () => {
             </div>
 
             <div className='flex gap-5'>
-                <a href="#" className='bg-[#ff2ed4] rounded-[20px] px-3'>Crea tu cuenta</a>
+                <a href="#" className='bg-[#ff2ed4] rounded-[20px] px-3 '>Crea tu cuenta</a>
                 <a href="#">Ingresar</a>
                 <a href="#">Mis compras</a>
             </div>
