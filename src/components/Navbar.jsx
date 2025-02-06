@@ -31,7 +31,7 @@ const Navbar = () => {
     }, []);
 
     return (
-        <div className="bg-[#2b2b7b] flex items-center justify-evenly">
+        <div className="bg-[#2b2b7b] flex items-center justify-evenly md:justify-between md:px-15">
             <div className="left">
                 <i className="bi bi-list text-white text-[45px]"></i>
                 <img src={Logo} alt="" className="hidden" />
@@ -39,7 +39,7 @@ const Navbar = () => {
             <div
                 ref={searchRef}
                 className={`p-1 overflow-hidden ${
-                    isExpanded ? 'w-[210px]' : 'w-[40px]'
+                    isExpanded ? 'w-[210px] md:w-[390px]' : 'w-[40px] md:w-[320px]'
                 } h-[40px] bg-white shadow-[2px_2px_20px_rgba(0,0,0,0.08)] rounded-full flex group items-center hover:duration-300 duration-300`}
                 onClick={handleSearchClick}
             >
@@ -53,9 +53,9 @@ const Navbar = () => {
                 />
             </div>
 
-            <div className="right flex gap-3 relative">
-                <i className="hidden bi bi-person-circle text-white text-[35px]"></i>
-                <i className="hidden bi bi-heart text-white text-[35px]"></i>
+            <div className="right flex gap-7 relative">
+                <i className="hidden md:block bi bi-person-circle text-white text-[35px]"></i>
+                <i className="hidden md:block bi bi-heart text-white text-[35px]"></i>
                 <div className="relative">
                     <p
                         className={`${
