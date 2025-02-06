@@ -46,11 +46,3 @@ Incluye funcionalidades clave como inicio de sesión, registro, búsqueda de pro
 
 ### Autenticación  
 - JWT / JSON Web Token
-
-## 🚀 Instalación y ejecución
-
-1. Clonar el repositorio:
-
-   ```bash
-   git clone https://github.com/tu-usuario/ecommerce.git
-   cd ecommerce
