@@ -4,9 +4,11 @@ import './main.css'
 import Navbar from './components/Navbar'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import SubNav from './components/SubNav';
+import Home from './pages/Home';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Navbar />
     <SubNav />
+    <Home />
   </StrictMode>,
 )
