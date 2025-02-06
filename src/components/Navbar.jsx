@@ -6,7 +6,8 @@ const Navbar = () => {
     const searchRef = useRef(null);
 
     //TODO: Terminar esto
-    const cantidadItems = 0;
+    const cartAmount = 0;
+    const favouriteAmount = 0;
 
     const handleSearchClick = () => {
         if (!isExpanded) {
@@ -31,10 +32,10 @@ const Navbar = () => {
     }, []);
 
     return (
-        <div className="bg-[#2b2b7b] flex items-center justify-evenly md:justify-between md:px-15">
+        <div className="bg-[#2b2b7b] flex items-center justify-evenly md:justify-between md:px-15 lg:py-1">
             <div className="left">
-                <i className="bi bi-list text-white text-[45px]"></i>
-                <img src={Logo} alt="" className="hidden" />
+                <i className="bi bi-list text-white text-[45px] lg:hidden"></i>
+                <img src={Logo} alt="" className="hidden lg:block w-60 p-3 cursor-pointer" />
             </div>
             <div
                 ref={searchRef}
@@ -59,7 +60,7 @@ const Navbar = () => {
                 <div className="relative">
                     <p
                         className={`${
-                            cantidadItems > 0 ? '' : 'hidden'
+                            cartAmount > 0 ? '' : 'hidden'
                         } bg-white text-black text-center text-[14px] font-medium flex justify-center items-center w-5 h-5 rounded-full absolute right-5`}
                     >
                         {/* //TODO: Terminar esto */}
