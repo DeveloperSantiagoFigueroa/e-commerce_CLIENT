@@ -1,8 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Logo from '../images/LogoHeader.webp';
-
+import MobileMenu from '../components/MobileMenu.jsx';
 const Navbar = () => {
+    // Estado que controla si el campo de búsqueda está expandido o colapsado.
+    // Función para actualizar el estado isExpanded.
     const [isExpanded, setIsExpanded] = useState(false);
+    // Estado que controla si fue clickeado el logo hamburger
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    // Crea una referencia al campo de búsqueda para detectar clics fuera de él.
     const searchRef = useRef(null);
 
     //TODO: Terminar esto
@@ -15,7 +20,13 @@ const Navbar = () => {
         }
     };
 
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
+    // Agrega y elimina un event listener para detectar clics fuera del campo.
     useEffect(() => {
+        // Función que colapsa el campo de búsqueda si el clic fue fuera de él.
         const handleClickOutside = (event) => {
             if (
                 searchRef.current &&
@@ -34,7 +45,13 @@ const Navbar = () => {
     return (
         <div className="bg-gradient-to-b from-[#2b2b7b] to-[#1b1b51] md:bg-none md:bg-[#2b2b7b] flex items-center justify-evenly md:justify-between md:px-15 lg:py-1 lg:justify-center lg:gap-8">
             <div className="left">
-                <i className="bi bi-list text-white text-[45px] lg:hidden"></i>
+                {/* Al hacer click activa el toggleMenu que le cambia el valor al contrario que tenga. Si es verdadero pone una cruz, caso contrario el logo de list */}
+                <i
+                    className={`bi ${
+                        isMenuOpen ? 'bi-x' : 'bi-list'
+                    } text-white text-[45px] lg:hidden`}
+                    onClick={toggleMenu}
+                ></i>
                 <img
                     src={Logo}
                     alt=""
@@ -87,6 +104,16 @@ const Navbar = () => {
                     <i className="bi bi-cart text-white text-[35px] cursor-pointer hover:text-[#ff2ed4] transition-all"></i>
                 </div>
             </div>
+            {/* Pasa la función toggleMenu como prop onClose */}
+            <MobileMenu isOpen={isMenuOpen} onClose={toggleMenu} />
+
+            {/* Overlay para cerrar el menú */}
+            {isMenuOpen && (
+                <div
+                    className="fixed inset-0 bg-[#00000057] bg-opacity-50 z-40 lg:hidden"
+                    onClick={toggleMenu}
+                ></div>
+            )}
         </div>
     );
 };
