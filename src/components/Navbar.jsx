@@ -32,15 +32,21 @@ const Navbar = () => {
     }, []);
 
     return (
-        <div className="bg-[#2b2b7b] flex items-center justify-evenly md:justify-between md:px-15 lg:py-1">
+        <div className="bg-gradient-to-b from-[#2b2b7b] to-[#1b1b51] md:bg-none md:bg-[#2b2b7b] flex items-center justify-evenly md:justify-between md:px-15 lg:py-1 lg:justify-center lg:gap-8">
             <div className="left">
                 <i className="bi bi-list text-white text-[45px] lg:hidden"></i>
-                <img src={Logo} alt="" className="hidden lg:block w-60 p-3 cursor-pointer" />
+                <img
+                    src={Logo}
+                    alt=""
+                    className="hidden lg:block w-60 p-3 cursor-pointer"
+                />
             </div>
             <div
                 ref={searchRef}
                 className={`p-1 overflow-hidden ${
-                    isExpanded ? 'w-[210px] md:w-[390px]' : 'w-[40px] md:w-[320px]'
+                    isExpanded
+                        ? 'w-[210px] md:w-[390px] lg:w-[450px] xl:w-[600px]'
+                        : 'w-[40px] md:w-[320px] xl:w-[500px]'
                 } h-[40px] bg-white shadow-[2px_2px_20px_rgba(0,0,0,0.08)] rounded-full flex group items-center hover:duration-300 duration-300`}
                 onClick={handleSearchClick}
             >
@@ -56,7 +62,19 @@ const Navbar = () => {
 
             <div className="right flex gap-7 relative">
                 <i className="hidden md:block bi bi-person-circle text-white text-[35px]"></i>
-                <i className="hidden md:block bi bi-heart text-white text-[35px]"></i>
+
+                <div className="relative hidden md:block">
+                    <p
+                        className={`${
+                            favouriteAmount > 0 ? '' : 'hidden'
+                        } bg-white text-black text-center text-[14px] font-medium flex justify-center items-center w-5 h-5 rounded-full absolute right-5`}
+                    >
+                        {/* //TODO: Terminar esto */}
+                        {favouriteAmount}
+                    </p>
+                    <i className="hidden md:block bi bi-heart text-white text-[35px]"></i>
+                </div>
+
                 <div className="relative">
                     <p
                         className={`${
@@ -64,6 +82,7 @@ const Navbar = () => {
                         } bg-white text-black text-center text-[14px] font-medium flex justify-center items-center w-5 h-5 rounded-full absolute right-5`}
                     >
                         {/* //TODO: Terminar esto */}
+                        {cartAmount}
                     </p>
                     <i className="bi bi-cart text-white text-[35px]"></i>
                 </div>
