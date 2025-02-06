@@ -18,7 +18,7 @@ const Error = () => {
                 <div className="flex justify-center">
                     <Link
                         to="/"
-                        className=" text-white text-center p-2 rounded-[9px] mt-5 w-30 bg-[#2b2b7b]"
+                        className=" text-white text-center p-2 rounded-[9px] mt-5 w-30 bg-[#2b2b7b] hover:bg-[#ff2ed4] transition-all"
                     >
                         Volver
                     </Link>
