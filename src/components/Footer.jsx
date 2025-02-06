@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from '../images/Logo.webp';
-import LogoQR from '../images/qr.png';
+import LogoQR from '../images/qr.webp';
 const Footer = () => {
     return (
         <footer className="bg-gradient-to-b from-[#2b2b7b] to-[#1b1b51] py-15">
@@ -81,6 +81,8 @@ const Footer = () => {
                 </div>
             </div>
         </footer>
+
+        
     );
 };
 

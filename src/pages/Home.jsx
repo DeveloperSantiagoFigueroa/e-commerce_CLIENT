@@ -1,6 +1,6 @@
 import React from 'react'
-import Logo from '../images/Home.png'
-import LogoDesktop from '../images/HomeDesktop.png'
+import Logo from '../images/Home.webp'
+import LogoDesktop from '../images/HomeDesktop.webp'
 const Home = () => {
   return (
     <div>
