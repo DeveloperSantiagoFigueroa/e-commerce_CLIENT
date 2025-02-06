@@ -5,6 +5,9 @@ const Navbar = () => {
     const [isExpanded, setIsExpanded] = useState(false);
     const searchRef = useRef(null);
 
+    //TODO: Terminar esto
+    const cantidadItems = 0;
+
     const handleSearchClick = () => {
         if (!isExpanded) {
             setIsExpanded(true);
@@ -13,7 +16,10 @@ const Navbar = () => {
 
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (searchRef.current && !searchRef.current.contains(event.target)) {
+            if (
+                searchRef.current &&
+                !searchRef.current.contains(event.target)
+            ) {
                 setIsExpanded(false);
             }
         };
@@ -30,7 +36,6 @@ const Navbar = () => {
                 <i className="bi bi-list text-white text-[45px]"></i>
                 <img src={Logo} alt="" className="hidden" />
             </div>
-
             <div
                 ref={searchRef}
                 className={`p-1 overflow-hidden ${
@@ -48,10 +53,19 @@ const Navbar = () => {
                 />
             </div>
 
-            <div className="right flex gap-3">
+            <div className="right flex gap-3 relative">
                 <i className="hidden bi bi-person-circle text-white text-[35px]"></i>
                 <i className="hidden bi bi-heart text-white text-[35px]"></i>
-                <i className="bi bi-cart text-white text-[35px]"></i>
+                <div className="relative">
+                    <p
+                        className={`${
+                            cantidadItems > 0 ? '' : 'hidden'
+                        } bg-white text-black text-center text-[14px] font-medium flex justify-center items-center w-5 h-5 rounded-full absolute right-5`}
+                    >
+                        {/* //TODO: Terminar esto */}
+                    </p>
+                    <i className="bi bi-cart text-white text-[35px]"></i>
+                </div>
             </div>
         </div>
     );
