@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Logo from '../images/LogoHeader.webp';
 import MobileMenu from '../components/MobileMenu.jsx';
+import ModalRegister from '../components/ModalRegister.jsx';
 const Navbar = () => {
     // Estado que controla si el campo de búsqueda está expandido o colapsado.
     // Función para actualizar el estado isExpanded.
     const [isExpanded, setIsExpanded] = useState(false);
     // Estado que controla si fue clickeado el logo hamburger
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     // Crea una referencia al campo de búsqueda para detectar clics fuera de él.
     const searchRef = useRef(null);
 
@@ -22,6 +24,16 @@ const Navbar = () => {
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
+    };
+
+    const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+    const openRegisterModal = () => {
+        setIsRegisterModalOpen(true);
+        setIsMenuOpen(false); // Cierra el menú cuando se abre el modal
+    };
+
+    const closeRegisterModal = () => {
+        setIsRegisterModalOpen(false);
     };
 
     // Agrega y elimina un event listener para detectar clics fuera del campo.
@@ -105,7 +117,11 @@ const Navbar = () => {
                 </div>
             </div>
             {/* Pasa la función toggleMenu como prop onClose */}
-            <MobileMenu isOpen={isMenuOpen} onClose={toggleMenu} />
+            <MobileMenu
+                isOpen={isMenuOpen}
+                onClose={toggleMenu}
+                onRegisterClick={openRegisterModal}
+            />
 
             {/* Overlay para cerrar el menú */}
             {isMenuOpen && (
@@ -113,6 +129,13 @@ const Navbar = () => {
                     className="fixed inset-0 bg-[#00000057] bg-opacity-50 z-40 lg:hidden"
                     onClick={toggleMenu}
                 ></div>
+            )}
+            {isRegisterModalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start z-50 h-screen w-screen overflow-y-auto">
+                    <div className="w-full h-full flex justify-center">
+                        <ModalRegister onClose={closeRegisterModal} />
+                    </div>
+                </div>
             )}
         </div>
     );

@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-const MobileMenu = ({ isOpen, onClose }) => {
+const MobileMenu = ({ isOpen, onClose, onRegisterClick }) => {
     return (
         <AnimatePresence>
             {isOpen && (
@@ -23,21 +23,57 @@ const MobileMenu = ({ isOpen, onClose }) => {
 
                     {/* Opciones del menú */}
                     <ul className="flex flex-col text-start ml-10 gap-6 text-[20px] -mt-6">
-                        <Link to="/ingresar"><i className="bi bi-box-arrow-in-right text-[20px] mr-2 text-green-500"></i>Ingresar</Link>
-                        <Link to="/registro"><i className="bi bi-person-plus text-[20px] mr-2 text-green-500"></i>Crear cuenta</Link>
-                        <Link to="/carrito"><i className="bi bi-cart4 text-[20px] mr-2"></i>Carrito</Link>
-                        <Link to="/favoritos"><i className="bi bi-bag-heart text-[20px] mr-2"></i>Favoritos</Link>
-                        <Link to="/mis-compras"><i className="bi bi-wallet2 text-[20px] mr-2"></i>Mis compras</Link>
-                        <Link to="/destacado"><i className="bi bi-stars text-[20px] mr-2"></i>Destacado</Link>
-                        <Link to="/contacto"><i className="bi bi-telephone text-[20px] mr-2"></i>Contacto</Link>
-                        <Link to="/ayuda"><i className="bi bi-info-circle text-[20px] mr-2"></i>Ayuda</Link>
-                        <Link to="/envios"><i className="bi bi-truck text-[20px] mr-2"></i>Envíos</Link>
-                        
-                        <div className='flex flex-col text-gray-400 text-[15px] gap-5 border-t-1 border-gray-600 mr-10'>
-                            <Link to="/reestablecer-contraseña" className='mt-6'>Ólvide mi contraseña</Link>
+                        <Link to="/ingresar">
+                            <i className="bi bi-box-arrow-in-right text-[20px] mr-2 text-green-500"></i>
+                            Ingresar
+                        </Link>
+                        <button onClick={onRegisterClick} className=' flex cursor-pointer'>
+                            <i className="bi bi-person-plus text-[20px] mr-2 text-green-500"></i>
+                            Crear cuenta
+                        </button>
+                        <Link to="/carrito">
+                            <i className="bi bi-cart4 text-[20px] mr-2"></i>
+                            Carrito
+                        </Link>
+                        <Link to="/favoritos">
+                            <i className="bi bi-bag-heart text-[20px] mr-2"></i>
+                            Favoritos
+                        </Link>
+                        <Link to="/mis-compras">
+                            <i className="bi bi-wallet2 text-[20px] mr-2"></i>
+                            Mis compras
+                        </Link>
+                        <Link to="/destacado">
+                            <i className="bi bi-stars text-[20px] mr-2"></i>
+                            Destacado
+                        </Link>
+                        <Link to="/contacto">
+                            <i className="bi bi-telephone text-[20px] mr-2"></i>
+                            Contacto
+                        </Link>
+                        <Link to="/ayuda">
+                            <i className="bi bi-info-circle text-[20px] mr-2"></i>
+                            Ayuda
+                        </Link>
+                        <Link to="/envios">
+                            <i className="bi bi-truck text-[20px] mr-2"></i>
+                            Envíos
+                        </Link>
+
+                        <div className="flex flex-col text-gray-400 text-[15px] gap-5 border-t-1 border-gray-600 mr-10">
+                            <Link
+                                to="/reestablecer-contraseña"
+                                className="mt-6"
+                            >
+                                Ólvide mi contraseña
+                            </Link>
                             <Link to="/como-comprar">Como comprar</Link>
-                            <Link to="/terminos-y-condiciones">Términos y condiciones</Link>
-                            <Link to="/empresa" className='pb-5'>Acerca de nosotros</Link>
+                            <Link to="/terminos-y-condiciones">
+                                Términos y condiciones
+                            </Link>
+                            <Link to="/empresa" className="pb-5">
+                                Acerca de nosotros
+                            </Link>
                         </div>
                     </ul>
                 </motion.div>
