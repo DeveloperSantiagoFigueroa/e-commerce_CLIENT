@@ -1,9 +1,10 @@
 import React from 'react';
 import Logo from '../images/Logo.webp';
 import LogoQR from '../images/qr.webp';
+import { Link } from 'react-router-dom';
 const Footer = ({openRegisterModal}) => {
     return (
-        <footer className="bg-gradient-to-b from-[#2b2b7b] to-[#1b1b51] py-15">
+        <footer className="bg-gradient-to-b from-[#2b2b7b] to-[#1b1b51] py-15 df">
             {/* Layout Desktop */}
             <div className="hidden md:flex justify-evenly text-white">
                 <div className="">
@@ -11,38 +12,38 @@ const Footer = ({openRegisterModal}) => {
                 </div>
 
                 <div className="flex flex-col">
-                    <a href="#" className="hover:underline">
+                    <Link to="/" className="hover:underline">
                         Ayuda
-                    </a>
-                    <a href="#" onClick={openRegisterModal} className="hover:underline">
+                    </Link>
+                    <p onClick={openRegisterModal} className="hover:underline cursor-pointer">
                         Crear cuenta
-                    </a>
-                    <a href="#" className="hover:underline">
+                    </p>
+                    <Link to='/' className="hover:underline">
                         Ingresar
-                    </a>
-                    <a href="#" className="hover:underline">
+                    </Link>
+                    <Link to='/' className="hover:underline">
                         Soporte
-                    </a>
-                    <a href="#" className="hover:underline">
+                    </Link>
+                    <Link to='/' className="hover:underline">
                         Ólvide mi contraseña
-                    </a>
+                    </Link>
                 </div>
                 <div className="flex flex-col">
-                    <a href="#" className="hover:underline">
+                    <Link to='/' className="hover:underline">
                         Ofertas
-                    </a>
-                    <a href="#" className="hover:underline">
+                    </Link>
+                    <Link to='/' className="hover:underline">
                         Envíos
-                    </a>
-                    <a href="#" className="hover:underline">
+                    </Link>
+                    <Link to='/' className="hover:underline">
                         Términos y condiciones
-                    </a>
-                    <a href="#" className="hover:underline">
+                    </Link>
+                    <Link to='/' className="hover:underline">
                         Reportar
-                    </a>
-                    <a href="#" className="hover:underline">
+                    </Link>
+                    <Link to='/' className="hover:underline">
                         Como comprar
-                    </a>
+                    </Link>
                 </div>
                 <div className="grid grid-cols-2 text-[25px] gap-0.5 items-center">
                     <i className="bi bi-whatsapp hover:cursor-pointer text-center"></i>
@@ -52,18 +53,18 @@ const Footer = ({openRegisterModal}) => {
                     <img src={LogoQR} className="w-10 ml-3" />
                 </div>
                 <div className="flex flex-col">
-                    <a href="#" className="hover:underline">
+                    <Link to='/' className="hover:underline">
                         Política de privacidad
-                    </a>
-                    <a href="#" className="hover:underline">
+                    </Link>
+                    <Link to='/' className="hover:underline">
                         Cookies
-                    </a>
-                    <a href="#" className="hover:underline">
+                    </Link>
+                    <Link to='/' className="hover:underline">
                         Acerca de nosotros
-                    </a>
-                    <a href="#" className="hover:underline">
+                    </Link>
+                    <Link to='/' className="hover:underline">
                         Contacto
-                    </a>
+                    </Link>
                 </div>
             </div>
 
