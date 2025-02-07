@@ -7,14 +7,15 @@ import ModalRegister from '../components/ModalRegister';
 
 const Layout = () => {
     const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
-
     const openRegisterModal = () => {
         setIsRegisterModalOpen(true);
     };
-
     const closeRegisterModal = () => {
         setIsRegisterModalOpen(false);
     };
+
+    
+
 
     return (
         <div>
@@ -25,7 +26,7 @@ const Layout = () => {
             />
             <SubNav openRegisterModal={openRegisterModal} />
             <Outlet />
-            <Footer />
+            <Footer openRegisterModal={openRegisterModal} />
             {isRegisterModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start z-50 h-screen w-screen overflow-y-auto">
                     <div className="w-full h-full flex justify-center">

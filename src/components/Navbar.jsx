@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Logo from '../images/LogoHeader.webp';
 import MobileMenu from '../components/MobileMenu.jsx';
 import ModalRegister from '../components/ModalRegister.jsx';
-const Navbar = ({ isRegisterModalOpen, openRegisterModal, closeRegisterModal }) => {
+const Navbar = () => {
     // Estado que controla si el campo de búsqueda está expandido o colapsado.
     // Función para actualizar el estado isExpanded.
     const [isExpanded, setIsExpanded] = useState(false);
@@ -26,6 +26,15 @@ const Navbar = ({ isRegisterModalOpen, openRegisterModal, closeRegisterModal }) 
         setIsMenuOpen(!isMenuOpen);
     };
 
+    const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+    const openRegisterModal = () => {
+        setIsRegisterModalOpen(true);
+        setIsMenuOpen(false); // Cierra el menú cuando se abre el modal
+    };
+
+    const closeRegisterModal = () => {
+        setIsRegisterModalOpen(false);
+    };
 
     // Agrega y elimina un event listener para detectar clics fuera del campo.
     useEffect(() => {
