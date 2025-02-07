@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-const MobileMenu = ({ isOpen, onClose, onRegisterClick }) => {
+const MobileMenu = ({ isOpen, onClose, onRegisterClick, onLoginClick  }) => {
     return (
         <AnimatePresence>
             {isOpen && (
@@ -23,11 +23,11 @@ const MobileMenu = ({ isOpen, onClose, onRegisterClick }) => {
 
                     {/* Opciones del menú */}
                     <ul className="flex flex-col text-start ml-10 gap-6 text-[20px] -mt-6">
-                        <Link to="/ingresar">
+                        <button onClick={onLoginClick} className='flex cursor-pointer'>
                             <i className="bi bi-box-arrow-in-right text-[20px] mr-2 text-green-500"></i>
                             Ingresar
-                        </Link>
-                        <button onClick={onRegisterClick} className=' flex cursor-pointer'>
+                        </button>
+                        <button onClick={onRegisterClick} className='flex cursor-pointer'>
                             <i className="bi bi-person-plus text-[20px] mr-2 text-green-500"></i>
                             Crear cuenta
                         </button>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SubNav = ({ openRegisterModal }) => {
+const SubNav = ({ openRegisterModal, openLoginModal }) => {
     return (
         <div className="hidden -mt-1 bg-gradient-to-b from-[#2b2b7b] to-[#1b1b51] md:flex justify-center gap-25 p-4 text-white font-medium">
             <div className='flex gap-5'>
@@ -14,7 +14,7 @@ const SubNav = ({ openRegisterModal }) => {
                 <button onClick={openRegisterModal} className='bg-[#ff2ed4] rounded-[20px] px-3 hover:bg-purple-800 transition-all'>
                     Crea tu cuenta
                 </button>
-                <a href="#" className='hover:text-[#ff2ed4] transition-all'>Ingresar</a>
+                <button onClick={openLoginModal} className='hover:text-[#ff2ed4] transition-all'>Ingresar</button>
                 <a href="#" className='hover:text-[#ff2ed4] transition-all'>Mis compras</a>
             </div>
         </div>

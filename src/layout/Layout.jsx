@@ -4,7 +4,7 @@ import SubNav from '../components/SubNav';
 import Footer from '../components/Footer';
 import { Outlet } from 'react-router-dom';
 import ModalRegister from '../components/ModalRegister';
-
+import ModalLogin from '../components/ModalLogin';
 const Layout = () => {
     const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
     const openRegisterModal = () => {
@@ -14,23 +14,44 @@ const Layout = () => {
         setIsRegisterModalOpen(false);
     };
 
-    
-
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+    const openLoginModal = () => {
+        setIsLoginModalOpen(true);
+    };
+    const closeLoginModal = () => {
+        setIsLoginModalOpen(false);
+    };
 
     return (
         <div>
-            <Navbar 
-                isRegisterModalOpen={isRegisterModalOpen} 
-                openRegisterModal={openRegisterModal} 
-                closeRegisterModal={closeRegisterModal} 
+            <Navbar
+                /*Modal de registro*/
+                isRegisterModalOpen={isRegisterModalOpen}
+                openRegisterModal={openRegisterModal}
+                closeRegisterModal={closeRegisterModal}
+                /*Modal de login*/
+                isLoginModalOpen={isLoginModalOpen}
+                openLoginModal={openLoginModal}
+                closeLoginModal={closeLoginModal}
             />
-            <SubNav openRegisterModal={openRegisterModal} />
+            <SubNav
+                openRegisterModal={openRegisterModal}
+                openLoginModal={openLoginModal}
+            />
             <Outlet />
             <Footer openRegisterModal={openRegisterModal} />
             {isRegisterModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start z-50 h-screen w-screen overflow-y-auto">
                     <div className="w-full h-full flex justify-center">
                         <ModalRegister onClose={closeRegisterModal} />
+                    </div>
+                </div>
+            )}
+
+            {isLoginModalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start z-50 h-screen w-screen overflow-y-auto">
+                    <div className="w-full h-full flex justify-center">
+                        <ModalLogin onClose={closeLoginModal} />
                     </div>
                 </div>
             )}

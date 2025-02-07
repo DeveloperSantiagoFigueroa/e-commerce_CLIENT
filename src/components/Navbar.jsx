@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Logo from '../images/LogoHeader.webp';
 import MobileMenu from '../components/MobileMenu.jsx';
+import ModalLogin from '../components/ModalLogin.jsx';
 import ModalRegister from '../components/ModalRegister.jsx';
+
 const Navbar = () => {
     // Estado que controla si el campo de búsqueda está expandido o colapsado.
     // Función para actualizar el estado isExpanded.
@@ -34,6 +36,14 @@ const Navbar = () => {
 
     const closeRegisterModal = () => {
         setIsRegisterModalOpen(false);
+    };
+
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+    const openLoginModal = () => {
+        setIsLoginModalOpen(true);
+    };
+    const closeLoginModal = () => {
+        setIsLoginModalOpen(false);
     };
 
     // Agrega y elimina un event listener para detectar clics fuera del campo.
@@ -121,8 +131,8 @@ const Navbar = () => {
                 isOpen={isMenuOpen}
                 onClose={toggleMenu}
                 onRegisterClick={openRegisterModal}
+                onLoginClick={openLoginModal}
             />
-            
 
             {/* Overlay para cerrar el menú */}
             {isMenuOpen && (
@@ -135,6 +145,14 @@ const Navbar = () => {
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start z-50 h-screen w-screen overflow-y-auto">
                     <div className="w-full h-full flex justify-center">
                         <ModalRegister onClose={closeRegisterModal} />
+                    </div>
+                </div>
+            )}
+
+            {isLoginModalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start z-50 h-screen w-screen overflow-y-auto">
+                    <div className="w-full h-full flex justify-center">
+                        <ModalLogin onClose={closeLoginModal} />
                     </div>
                 </div>
             )}
