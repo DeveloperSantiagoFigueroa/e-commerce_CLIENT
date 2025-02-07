@@ -45,10 +45,10 @@ const Footer = () => {
                     </a>
                 </div>
                 <div className="grid grid-cols-2 text-[25px] gap-0.5 items-center">
-                    <i class="bi bi-whatsapp hover:cursor-pointer text-center"></i>
-                    <i class="bi bi-instagram hover:cursor-pointer text-center"></i>
-                    <i class="bi bi-twitter-x hover:cursor-pointer text-center"></i>
-                    <i class="bi bi-facebook hover:cursor-pointer text-center"></i>
+                    <i className="bi bi-whatsapp hover:cursor-pointer text-center"></i>
+                    <i className="bi bi-instagram hover:cursor-pointer text-center"></i>
+                    <i className="bi bi-twitter-x hover:cursor-pointer text-center"></i>
+                    <i className="bi bi-facebook hover:cursor-pointer text-center"></i>
                     <img src={LogoQR} className="w-10 ml-3" />
                 </div>
                 <div className="flex flex-col">
@@ -70,10 +70,10 @@ const Footer = () => {
             {/* Layout Mobile */}
             <div className="md:hidden">
                 <div className="flex justify-center gap-3 text-[30px] text-white">
-                    <i class="bi bi-whatsapp"></i>
-                    <i class="bi bi-instagram"></i>
-                    <i class="bi bi-twitter-x"></i>
-                    <i class="bi bi-facebook"></i>
+                    <i className="bi bi-whatsapp"></i>
+                    <i className="bi bi-instagram"></i>
+                    <i className="bi bi-twitter-x"></i>
+                    <i className="bi bi-facebook"></i>
                 </div>
 
                 <div className="flex justify-center">
