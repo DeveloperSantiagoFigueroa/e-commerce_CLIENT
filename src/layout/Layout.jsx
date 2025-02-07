@@ -7,32 +7,31 @@ import ModalRegister from '../components/ModalRegister';
 import ModalLogin from '../components/ModalLogin';
 const Layout = () => {
     const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false); // Añade este estado
+
     const openRegisterModal = () => {
         setIsRegisterModalOpen(true);
-    };
-    const closeRegisterModal = () => {
-        setIsRegisterModalOpen(false);
+        setIsMenuOpen(false); // Cierra el menú móvil
     };
 
-    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+    const closeRegisterModal = () => setIsRegisterModalOpen(false);
+
     const openLoginModal = () => {
         setIsLoginModalOpen(true);
+        setIsMenuOpen(false); // 👈 Añade esta línea
     };
-    const closeLoginModal = () => {
-        setIsLoginModalOpen(false);
-    };
+    const closeLoginModal = () => setIsLoginModalOpen(false);
 
     return (
         <div>
             <Navbar
-                /*Modal de registro*/
-                isRegisterModalOpen={isRegisterModalOpen}
                 openRegisterModal={openRegisterModal}
-                closeRegisterModal={closeRegisterModal}
-                /*Modal de login*/
-                isLoginModalOpen={isLoginModalOpen}
                 openLoginModal={openLoginModal}
-                closeLoginModal={closeLoginModal}
+                closeRegisterModal={closeRegisterModal} // Añade estas props
+                closeLoginModal={closeLoginModal} // Añade estas props
+                isMenuOpen={isMenuOpen}
+                setIsMenuOpen={setIsMenuOpen}
             />
             <SubNav
                 openRegisterModal={openRegisterModal}
@@ -47,7 +46,6 @@ const Layout = () => {
                     </div>
                 </div>
             )}
-
             {isLoginModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start z-50 h-screen w-screen overflow-y-auto">
                     <div className="w-full h-full flex justify-center">

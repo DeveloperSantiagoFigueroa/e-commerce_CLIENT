@@ -4,12 +4,16 @@ import MobileMenu from '../components/MobileMenu.jsx';
 import ModalLogin from '../components/ModalLogin.jsx';
 import ModalRegister from '../components/ModalRegister.jsx';
 
-const Navbar = () => {
+const Navbar = ({  openRegisterModal,
+    openLoginModal,
+    closeRegisterModal, // Recibe las props
+    closeLoginModal,    // Recibe las props
+    isMenuOpen,
+    setIsMenuOpen}) => {
     // Estado que controla si el campo de búsqueda está expandido o colapsado.
     // Función para actualizar el estado isExpanded.
     const [isExpanded, setIsExpanded] = useState(false);
     // Estado que controla si fue clickeado el logo hamburger
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     // Crea una referencia al campo de búsqueda para detectar clics fuera de él.
     const searchRef = useRef(null);
@@ -25,26 +29,9 @@ const Navbar = () => {
     };
 
     const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
+        setIsMenuOpen(!isMenuOpen); // Usa la prop pasada desde Layout
     };
 
-    const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
-    const openRegisterModal = () => {
-        setIsRegisterModalOpen(true);
-        setIsMenuOpen(false); // Cierra el menú cuando se abre el modal
-    };
-
-    const closeRegisterModal = () => {
-        setIsRegisterModalOpen(false);
-    };
-
-    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-    const openLoginModal = () => {
-        setIsLoginModalOpen(true);
-    };
-    const closeLoginModal = () => {
-        setIsLoginModalOpen(false);
-    };
 
     // Agrega y elimina un event listener para detectar clics fuera del campo.
     useEffect(() => {
@@ -141,21 +128,7 @@ const Navbar = () => {
                     onClick={toggleMenu}
                 ></div>
             )}
-            {isRegisterModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start z-50 h-screen w-screen overflow-y-auto">
-                    <div className="w-full h-full flex justify-center">
-                        <ModalRegister onClose={closeRegisterModal} />
-                    </div>
-                </div>
-            )}
-
-            {isLoginModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start z-50 h-screen w-screen overflow-y-auto">
-                    <div className="w-full h-full flex justify-center">
-                        <ModalLogin onClose={closeLoginModal} />
-                    </div>
-                </div>
-            )}
+     
         </div>
     );
 };
