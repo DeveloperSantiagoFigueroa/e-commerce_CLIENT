@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+const MobileMenu = ({ isOpen, onClose, onRegisterClick, onLoginClick }) => {
+    const { user, logout } = useContext(AuthContext);
 
-const MobileMenu = ({ isOpen, onClose, onRegisterClick, onLoginClick  }) => {
     return (
         <AnimatePresence>
             {isOpen && (
@@ -22,15 +24,29 @@ const MobileMenu = ({ isOpen, onClose, onRegisterClick, onLoginClick  }) => {
                     </div>
 
                     {/* Opciones del menú */}
+
                     <ul className="flex flex-col text-start ml-10 gap-6 text-[20px] -mt-6">
-                        <button onClick={onLoginClick} className='flex cursor-pointer'>
-                            <i className="bi bi-box-arrow-in-right text-[20px] mr-2 text-green-500"></i>
-                            Ingresar
-                        </button>
-                        <button onClick={onRegisterClick} className='flex cursor-pointer'>
-                            <i className="bi bi-person-plus text-[20px] mr-2 text-green-500"></i>
-                            Crear cuenta
-                        </button>
+                        {/* Sí no hay token en el localstorage (osea que no tiene sesión)
+                        muestra los botones de Ingresar / Crear cuenta, caso contrario de que
+                        si tenga un token y sesion ingresada, no los muestra. */}
+                        {!user && (
+                            <>
+                                <button
+                                    onClick={onLoginClick}
+                                    className="flex cursor-pointer"
+                                >
+                                    <i className="bi bi-box-arrow-in-right text-[20px] mr-2 text-green-500"></i>
+                                    Ingresar
+                                </button>
+                                <button
+                                    onClick={onRegisterClick}
+                                    className="flex cursor-pointer"
+                                >
+                                    <i className="bi bi-person-plus text-[20px] mr-2 text-green-500"></i>
+                                    Crear cuenta
+                                </button>
+                            </>
+                        )}
                         <Link to="/carrito">
                             <i className="bi bi-cart4 text-[20px] mr-2"></i>
                             Carrito
@@ -59,6 +75,16 @@ const MobileMenu = ({ isOpen, onClose, onRegisterClick, onLoginClick  }) => {
                             <i className="bi bi-truck text-[20px] mr-2"></i>
                             Envíos
                         </Link>
+                        {/* El botón de cerrar sesión solo es visible para aquellos que si tienen una sesión iniciada */}
+                        {user && (
+                            <button
+                                onClick={logout}
+                                className="flex cursor-pointer"
+                            >
+                                <i className="bi bi-escape text-[20px] mr-2 text-red-500"></i>
+                                Cerrar sesión
+                            </button>
+                        )}
 
                         <div className="flex flex-col text-gray-400 text-[15px] gap-5 border-t-1 border-gray-600 mr-10">
                             <Link
