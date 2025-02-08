@@ -63,6 +63,7 @@ const Navbar = ({
     }, []);
 
     return (
+        
         <div className="bg-gradient-to-b from-[#2b2b7b] to-[#1b1b51] md:bg-none md:bg-[#2b2b7b] flex items-center justify-evenly md:justify-between md:px-15 lg:py-1 lg:justify-center lg:gap-8">
             <div className="left">
                 {/* Al hacer click activa el toggleMenu que le cambia el valor al contrario que tenga. Si es verdadero pone una cruz, caso contrario el logo de list */}
