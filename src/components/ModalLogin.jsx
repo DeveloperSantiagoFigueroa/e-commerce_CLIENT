@@ -3,7 +3,7 @@ import React from 'react';
 const ModalLogin = ({ onClose }) => {
     return (
         <div className="bg-gradient-to-b from-[#2b2b7b] to-[#761663] flex flex-col px-6 gap-5 md:px-50 lg:px-90 xl:px-120 h-screen w-full overflow-y-auto">
-            <div className="flex justify-end h-[50px] mt-5 md:mt-30">
+            <div className="flex justify-end h-[50px] mt-5 md:mt-35">
                 <i
                     onClick={onClose}
                     className="bi bi-x-circle text-red-500 text-[40px] cursor-pointer transition-transform duration-300 transform hover:rotate-90 flex items-center justify-center w-[50px] aspect-square"
