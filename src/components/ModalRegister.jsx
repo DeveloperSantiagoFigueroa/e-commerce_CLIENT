@@ -43,9 +43,7 @@ const ModalRegister = ({ onClose }) => {
             localStorage.setItem('token', res.token);
             setSuccess(res.msg);
             setError(false);
-            setTimeout(() => {
-                onClose();
-            }, 1500);
+            onClose();
         } catch (error) {
             setError(error.msg);
             setSuccess(false);
