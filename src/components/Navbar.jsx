@@ -1,22 +1,23 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import Logo from '../images/LogoHeader.webp';
 import MobileMenu from '../components/MobileMenu.jsx';
 import ModalLogin from '../components/ModalLogin.jsx';
 import ModalRegister from '../components/ModalRegister.jsx';
+import { AuthContext } from '../context/AuthContext.jsx';
 
-const Navbar = ({  openRegisterModal,
+const Navbar = ({
+    openRegisterModal,
     openLoginModal,
     closeRegisterModal, // Recibe las props
-    closeLoginModal,    // Recibe las props
+    closeLoginModal, // Recibe las props
     isMenuOpen,
-    setIsMenuOpen}) => {
-    // Estado que controla si el campo de búsqueda está expandido o colapsado.
-    // Función para actualizar el estado isExpanded.
+    setIsMenuOpen,
+}) => {
+    const { user, logout } = useContext(AuthContext);
     const [isExpanded, setIsExpanded] = useState(false);
-    // Estado que controla si fue clickeado el logo hamburger
-
-    // Crea una referencia al campo de búsqueda para detectar clics fuera de él.
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const searchRef = useRef(null);
+    const dropdownRef = useRef(null);
 
     //TODO: Terminar esto
     const cartAmount = 0;
@@ -32,6 +33,9 @@ const Navbar = ({  openRegisterModal,
         setIsMenuOpen(!isMenuOpen); // Usa la prop pasada desde Layout
     };
 
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
 
     // Agrega y elimina un event listener para detectar clics fuera del campo.
     useEffect(() => {
@@ -42,6 +46,13 @@ const Navbar = ({  openRegisterModal,
                 !searchRef.current.contains(event.target)
             ) {
                 setIsExpanded(false);
+            }
+
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target)
+            ) {
+                setIsDropdownOpen(false);
             }
         };
 
@@ -87,7 +98,41 @@ const Navbar = ({  openRegisterModal,
             </div>
 
             <div className="right flex gap-7 relative">
-                <i className="hidden md:block bi bi-person-circle text-white text-[35px] cursor-pointer hover:text-[#ff2ed4] transition-all"></i>
+                <div className="relative hidden md:block" ref={dropdownRef}>
+                    <i
+                        className="bi bi-person-circle text-white text-[35px] cursor-pointer hover:text-[#ff2ed4] transition-all"
+                        onClick={toggleDropdown}
+                    ></i>
+
+                    {isDropdownOpen && (
+                        <div className="select-none absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-50 flex flex-col justify-center align-center items-center">
+                            {user && (
+                                <>
+                                    <button
+                                        onClick={logout}
+                                        className=" w-[100%] cursor-pointer text-center px-4 py-2 text-black hover:bg-gray-300 transition-all"
+                                    >
+                                        Cerrar sesión
+                                    </button>
+                                    <button className=" w-[100%] cursor-pointer text-center px-4 py-2 text-black hover:bg-gray-300 transition-all">
+                                        Cambiar contraseña
+                                    </button>
+                                </>
+                            )}
+
+                            {!user && (
+                                <>
+                                    <button onClick={openLoginModal} className=" w-[100%] cursor-pointer text-center px-4 py-2 text-black hover:bg-gray-300 transition-all">
+                                        Ingresar
+                                    </button>
+                                    <button onClick={openRegisterModal} className=" w-[100%] cursor-pointer text-center px-4 py-2 text-black hover:bg-gray-300 transition-all">
+                                        Crear cuenta
+                                    </button>
+                                </>
+                            )}
+                        </div>
+                    )}
+                </div>
 
                 <div className="relative hidden md:block">
                     <p
@@ -128,7 +173,6 @@ const Navbar = ({  openRegisterModal,
                     onClick={toggleMenu}
                 ></div>
             )}
-     
         </div>
     );
 };
