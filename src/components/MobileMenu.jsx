@@ -47,6 +47,8 @@ const MobileMenu = ({ isOpen, onClose, onRegisterClick, onLoginClick }) => {
                                 </button>
                             </>
                         )}
+                        {/* Sí hay usuario logeado, que muestre su nombre */}
+                        {user && <p className='font-medium -mb-2'>{user.firstname + ' ' + user.lastname}</p>}
                         <Link to="/carrito">
                             <i className="bi bi-cart4 text-[20px] mr-2"></i>
                             Carrito
@@ -109,3 +111,33 @@ const MobileMenu = ({ isOpen, onClose, onRegisterClick, onLoginClick }) => {
 };
 
 export default MobileMenu;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Puki 🐕, sos eterno acá
