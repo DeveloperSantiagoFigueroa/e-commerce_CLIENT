@@ -2,7 +2,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import Layout from '../layout/Layout';
 import Home from '../pages/Home';
 import Error from '../pages/Error';
-import ForgotPassword from '../layout/ForgotPassword';
+import ForgotPassword from '../pages/ForgotPassword';
+import ResetPassword from '../pages/ResetPassword';
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -16,13 +17,18 @@ export const router = createBrowserRouter([
 
             {
                 path: '/reestablecer-contraseña',
-                element: <ForgotPassword />
+                element: <ForgotPassword />,
+            },
+
+            {
+                path: '/reset-password/:token',
+                element: <ResetPassword />,
             },
 
             {
                 path: '*',
                 element: <Error />,
-            }
+            },
         ],
     },
 ]);
