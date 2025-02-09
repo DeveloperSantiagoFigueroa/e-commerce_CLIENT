@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 const Error = () => {
     return (
-        //Quiero que este centrado en la pantalla
-        <div className='flex flex-col items-center justify-center h-screen'>
+        <div>
             <div className="bg-white mt-30 mb-20">
                 <h1 className="text-center text-[40px] font-medium">
                     ERROR 404
