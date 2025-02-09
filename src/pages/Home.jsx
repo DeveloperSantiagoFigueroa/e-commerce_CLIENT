@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from '../images/Home.webp';
 import LogoDesktop from '../images/HomeDesktop.webp';
+import Products from '../components/Products';
 const Home = () => {
     return (
         <div>
@@ -14,6 +15,7 @@ const Home = () => {
                     className="hidden lg:block w-screen py-1 lg:w-[650px]"
                 />
             </div>
+            <Products />
         </div>
     );
 };
