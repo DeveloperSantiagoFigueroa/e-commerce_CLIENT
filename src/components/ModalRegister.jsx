@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { registerFetch } from '../api/registerFetch';
 import { AuthContext } from '../context/AuthContext';
-const ModalRegister = ({ onClose }) => {
+import { Link } from 'react-router-dom';
+const ModalRegister = ({ onClose, openLoginModal }) => {
     const { login } = useContext(AuthContext);
     const [formData, setFormData] = useState({
         firstname: '',
@@ -48,6 +49,11 @@ const ModalRegister = ({ onClose }) => {
             setError(error.msg);
             setSuccess(false);
         }
+    };
+
+    const handleLoginClick = () => {
+        onClose();
+        openLoginModal();
     };
 
     return (
@@ -145,12 +151,10 @@ const ModalRegister = ({ onClose }) => {
             )}
 
             <div className="flex flex-col mb-10">
-                <a href="#" className="text-gray-400 text-center underline">
+                <button onClick={handleLoginClick} className="cursor-pointer text-gray-400 text-center underline">
                     Ya tengo cuenta
-                </a>
-                <a href="#" className="text-gray-400 text-center underline">
-                    Ólvide mi contraseña
-                </a>
+                </button>
+                <Link to='/forgot-password' onClick={onClose} className='text-gray-400 text-center underline'>Ólvide mi contraseña</Link>
             </div>
         </div>
     );
