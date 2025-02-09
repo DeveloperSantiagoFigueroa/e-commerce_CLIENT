@@ -90,11 +90,11 @@ const ProductGrid = ({ products }) => (
 
 // **📌 Componente de tarjeta de producto**
 const ProductCard = ({ product }) => (
-    <div className="bg-white p-4 rounded-[6px] shadow-lg">
+    <div className="bg-white p-4 rounded-[6px] shadow-lg flex flex-col justify-between">
         <img
             src={product.mainImage}
             alt={product.name}
-            className="w-full h-40 object-cover mb-2"
+            className="w-full h-40 object-contain mb-2"
         />
         <h3 className="text-lg font-semibold">{product.name}</h3>
         <p className="text-gray-500 text-sm">{product.description}</p>
