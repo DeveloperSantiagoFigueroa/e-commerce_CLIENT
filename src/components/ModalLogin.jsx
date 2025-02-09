@@ -105,7 +105,7 @@ const ModalLogin = ({ onClose, openRegisterModal }) => {
             )}
 
             <div className="flex flex-col mb-10">
-                <Link onClick={onClose} to='/forgot-password' className="text-gray-400 text-center underline">Ólvide mi contraseña</Link>
+                <Link onClick={onClose} to='/reestablecer-contraseña' className="text-gray-400 text-center underline">Ólvide mi contraseña</Link>
                 <button onClick={handleRegisterClick} className="cursor-pointer text-gray-400 text-center underline">
                     No tengo cuenta
                 </button>
