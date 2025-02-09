@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { loginFetch } from '../api/loginFetch'; // Importa la función que hace la petición al backend
+import { Link } from 'react-router-dom';
 
-const ModalLogin = ({ onClose }) => {
+const ModalLogin = ({ onClose, openRegisterModal }) => {
     const { login } = useContext(AuthContext);
     const [formData, setFormData] = useState({
         email: '',
@@ -37,6 +38,11 @@ const ModalLogin = ({ onClose }) => {
         } catch (err) {
             setError(err.message); // Captura correctamente el mensaje de error
         }
+    };
+
+    const handleRegisterClick = () => {
+        onClose();
+        openRegisterModal();
     };
 
     return (
@@ -99,12 +105,10 @@ const ModalLogin = ({ onClose }) => {
             )}
 
             <div className="flex flex-col mb-10">
-                <a href="#" className="text-gray-400 text-center underline">
-                    Olvidé mi contraseña
-                </a>
-                <a href="#" className="text-gray-400 text-center underline">
+                <Link onClick={onClose} to='/forgot-password' className="text-gray-400 text-center underline">Ólvide mi contraseña</Link>
+                <button onClick={handleRegisterClick} className="cursor-pointer text-gray-400 text-center underline">
                     No tengo cuenta
-                </a>
+                </button>
             </div>
         </div>
     );
