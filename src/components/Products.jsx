@@ -31,7 +31,7 @@ const Products = () => {
     fetchProducts();
   }, []);
 
-  // Detecta cambios de pantalla y ajusta la cantidad de productos por página
+  // Cuando hice este codigo solo lo entendia dios y yo, ahora solo dios lo entiende
   useEffect(() => {
     const updateItemsPerPage = () => {
       const width = window.innerWidth;
