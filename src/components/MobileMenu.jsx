@@ -26,6 +26,7 @@ const MobileMenu = ({ isOpen, onClose, onRegisterClick, onLoginClick }) => {
                     {/* Opciones del menú */}
 
                     <ul className="flex flex-col text-start ml-10 gap-6 text-[20px] -mt-6">
+                        <Link to="/"><i class="bi bi-house text-[20px] mr-2"></i>Inicio</Link>
                         {/* Sí no hay token en el localstorage (osea que no tiene sesión)
                         muestra los botones de Ingresar / Crear cuenta, caso contrario de que
                         si tenga un token y sesion ingresada, no los muestra. */}
