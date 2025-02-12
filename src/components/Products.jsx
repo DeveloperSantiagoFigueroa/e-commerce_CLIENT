@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getProductsFetch } from '../api/getProductsFetch';
+import { useNavigate } from 'react-router-dom';
 
 // Productos por página en cada dispositivo
 const ITEMS_PER_PAGE = {
@@ -89,18 +90,28 @@ const ProductGrid = ({ products }) => (
 );
 
 // **📌 Componente de tarjeta de producto**
-const ProductCard = ({ product }) => (
-    <div className="bg-white p-4 rounded-[6px] shadow-lg flex flex-col justify-between">
-        <img
-            src={product.mainImage}
-            alt={product.name}
-            className="w-full h-40 object-contain mb-2"
-        />
-        <h3 className="text-lg font-semibold">{product.name}</h3>
-        <p className="text-gray-500 text-sm">{product.description}</p>
-        <p className="text-pink-500 font-bold text-lg">$USD {product.price}</p>
-    </div>
-);
+const ProductCard = ({ product }) => {
+    const navigate = useNavigate();
+    
+    const handleClick = () => {
+        navigate(`/products/${product._id}`);
+    };
+
+    return (
+        <div className="cursor-pointer bg-white p-4 rounded-[6px] shadow-lg flex flex-col justify-between" onClick={handleClick}>
+            <img
+                src={product.mainImage}
+                alt={product.name}
+                className="w-full h-40 object-contain mb-2"
+            />
+            <h3 className="text-lg font-semibold">{product.name}</h3>
+            <p className="text-gray-500 text-sm">{product.description}</p>
+            <p className="text-pink-500 font-bold text-lg">
+                $USD {product.price}
+            </p>
+        </div>
+    );
+};
 
 // **📌 Componente de paginación**
 const Pagination = ({ currentPage, totalPages, onPrev, onNext }) => (
