@@ -4,7 +4,7 @@ const SubNav = ({ openRegisterModal, openLoginModal }) => {
     const { user } = useContext(AuthContext);
 
     return (
-        <div className="hidden -mt-1 bg-gradient-to-b from-[#2b2b7b] to-[#1b1b51] md:flex justify-center gap-25 p-4 text-white font-medium">
+        <div className="hidden sticky md:top-[67px]  lg:top-[86px] xl:top-[84px] z-40 -mt-1 bg-gradient-to-b from-[#2b2b7b] to-[#1b1b51] md:flex justify-center gap-25 p-4 text-white font-medium">
             <div className="flex gap-5">
                 <a href="#" className="hover:text-[#ff2ed4] transition-all">
                     Destacado

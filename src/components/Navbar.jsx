@@ -71,7 +71,7 @@ const Navbar = ({
     }, []);
 
     return (
-        <div className="bg-gradient-to-b from-[#2b2b7b] to-[#1b1b51] md:bg-none md:bg-[#2b2b7b] flex items-center justify-evenly md:justify-between md:px-15 lg:py-1 lg:justify-center lg:gap-8">
+        <div className="sticky top-0 z-50 bg-gradient-to-b from-[#2b2b7b] to-[#1b1b51] md:bg-none md:bg-[#2b2b7b] flex items-center justify-evenly md:justify-between md:px-15 lg:py-1 lg:justify-center lg:gap-8">
             <div className="left">
                 <i
                     className={`bi ${
@@ -118,9 +118,10 @@ const Navbar = ({
                                     to={`/products/${product._id}`}
                                     className="block p-2 hover:bg-gray-200"
                                     onClick={() => {
-                                        setIsExpanded(false); // Cierra el input de búsqueda
-                                        setSearchTerm(''); // Limpia el término de búsqueda
-                                    }}
+                                        setIsExpanded(false);
+                                        setSearchTerm(""); 
+                                        window.scrollTo({ top: 0, behavior: "smooth" }); // ✅ Hace scroll arriba
+                                      }}
                                 >
                                     {product.name}
                                 </Link>

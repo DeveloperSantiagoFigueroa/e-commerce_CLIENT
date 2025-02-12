@@ -92,13 +92,15 @@ const ProductGrid = ({ products }) => (
 // **📌 Componente de tarjeta de producto**
 const ProductCard = ({ product }) => {
     const navigate = useNavigate();
-    
-    const handleClick = () => {
-        navigate(`/products/${product._id}`);
-    };
 
     return (
-        <div className="cursor-pointer bg-white p-4 rounded-[6px] shadow-lg flex flex-col justify-between" onClick={handleClick}>
+        <div
+            className="cursor-pointer bg-white p-4 rounded-[6px] shadow-lg flex flex-col justify-between"
+            onClick={() => {
+                navigate(`/products/${product._id}`);
+                window.scrollTo({ top: 0, behavior: 'smooth' }); // ✅ Hace scroll arriba
+            }}
+        >
             <img
                 src={product.mainImage}
                 alt={product.name}
