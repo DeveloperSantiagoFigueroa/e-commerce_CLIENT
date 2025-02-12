@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { getProductByIdFetch } from '../api/getProductByIdFetch';
+import { getProductsFetch } from '../api/getProductsFetch'; // ✅ Para obtener más productos
+
 const Product = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [products, setProducts] = useState([]); // ✅ Lista de productos para "Ver más productos"
 
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const data = await getProductByIdFetch(id); // ✅ Pasar `id`
+                const data = await getProductByIdFetch(id);
                 setProduct(data);
+                setSelectedImage(data.mainImage);
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -19,54 +25,107 @@ const Product = () => {
             }
         };
 
+        const fetchMoreProducts = async () => {
+            try {
+                const data = await getProductsFetch();
+                setProducts(data.filter(p => p._id !== id)); // ✅ Excluye el producto actual
+            } catch (err) {
+                console.error("Error al cargar más productos:", err);
+            }
+        };
+
         fetchProduct();
+        fetchMoreProducts();
     }, [id]);
 
     if (loading)
         return (
-            <div className="my-40 text-center">
-                <div className="flex-col gap-4 w-full flex items-center justify-center">
-                    <div className="w-28 h-28 border-8 text-blue-400 text-4xl animate-spin border-gray-300 flex items-center justify-center border-t-blue-400 rounded-full">
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                            height="1em"
-                            width="1em"
-                            className="animate-ping"
-                        >
-                        </svg>
-                    </div>
-                </div>
+            <div className="flex items-center justify-center h-screen">
+                <div className="w-20 h-20 border-8 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
             </div>
         );
+
     if (error) return <p className="text-center text-red-500">{error}</p>;
 
     return (
-        <div className="m-5 flex flex-col gap-4 justify-between md:gap-10 md:mx-40">
-            <div className="relative">
+        <div className="m-5 flex flex-col gap-8 md:mx-20 lg:flex-row lg:mx-40 xl:mx-60">
+            {/* Miniaturas en fila (sm, md) y columna (lg) */}
+            <div className="hidden lg:flex flex-col gap-2 w-[100px]">
+                {[product.mainImage, ...product.images].map((img, index) => (
+                    <img
+                        key={index}
+                        src={img}
+                        alt="Miniatura"
+                        onClick={() => setSelectedImage(img)}
+                        className={`w-full h-[80px] object-cover rounded-md cursor-pointer border-2 ${
+                            selectedImage === img ? 'border-blue-500' : 'border-gray-300'
+                        } transition-all hover:opacity-75`}
+                    />
+                ))}
+            </div>
+
+            {/* Imagen principal */}
+            <div className="relative w-full lg:w-[500px]">
                 <img
-                    src={product.mainImage}
+                    src={selectedImage}
                     alt={product.name}
-                    className="rounded-[10px] h-40 object-contain w-full"
+                    className="rounded-[10px] w-full aspect-[4/3] object-cover"
                 />
 
-                {/* ❤️ Ícono de favoritos (sin funcionalidad aún) */}
-                <button className="absolute top-2 right-2 bg-red-600 h-[40px] w-[40px] rounded-[100%] text-white hover:text-red-500 transition-all text-[25px]">
-                    <i className="bi bi-heart  rounded-[100%]"></i>
+                {/* Ícono de favoritos */}
+                <button className="absolute top-2 right-2 bg-gray-100 hover:bg-red-500 text-red-500 hover:text-white h-[40px] w-[40px] rounded-full flex items-center justify-center transition-all">
+                    <i className="bi bi-heart text-[22px]"></i>
                 </button>
             </div>
 
-            <div className="flex flex-col gap-3">
-                <h2 className="font-bold text-[30px]">{product.name}</h2>
-                <p className="text-gray-700 text-[14px]">
-                    {product.description}
-                </p>
-                <p className="font-bold text-[20px]">$USD {product.price}</p>
+            {/* Miniaturas debajo de la imagen en móvil */}
+            <div className="flex lg:hidden gap-2 justify-center mt-3">
+                {[product.mainImage, ...product.images].map((img, index) => (
+                    <img
+                        key={index}
+                        src={img}
+                        alt="Miniatura"
+                        onClick={() => setSelectedImage(img)}
+                        className={`w-16 h-16 md:w-20 md:h-20 object-cover rounded-md cursor-pointer border-2 ${
+                            selectedImage === img ? 'border-blue-500' : 'border-gray-300'
+                        } transition-all hover:opacity-75`}
+                    />
+                ))}
             </div>
 
-            <button className="bg-green-400 rounded-[8px] text-white px-2 py-3 cursor-pointer">
-                Agregar al carrito
-            </button>
+            {/* Información del producto */}
+            <div className="flex flex-col gap-3 lg:w-[400px]">
+                <h2 className="font-bold text-[30px]">{product.name}</h2>
+                <p className="text-gray-700 text-[14px]">{product.description}</p>
+                <p className="font-bold text-[20px]">$USD {product.price}</p>
+
+                {/* Botón de agregar al carrito */}
+                <button className="bg-green-500 hover:bg-green-600 rounded-[8px] text-white px-4 py-3 cursor-pointer transition-all">
+                    Agregar al carrito
+                </button>
+            </div>
+
+            {/* Sección "Ver más productos" */}
+            <div className="mt-10">
+                <h3 className="text-xl font-bold text-gray-800 text-center mb-5">Ver más productos</h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {products.slice(0, 8).map((p) => (
+                        <div 
+                            key={p._id} 
+                            className="bg-white p-3 rounded-lg shadow-md cursor-pointer hover:shadow-xl transition-all"
+                            onClick={() => navigate(`/product/${p._id}`)}
+                        >
+                            <img 
+                                src={p.mainImage} 
+                                alt={p.name} 
+                                className="w-full h-32 object-cover rounded-md"
+                            />
+                            <h4 className="mt-2 text-center text-sm font-semibold">{p.name}</h4>
+                            <p className="text-center text-pink-500 font-bold text-md">$USD {p.price}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 };
