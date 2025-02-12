@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getProductByIdFetch } from '../api/getProductByIdFetch';
 import { getProductsFetch } from '../api/getProductsFetch';
+import { addFavouriteFetch, getFavoritesFetch } from '../api/getFavoritesFetch';
+import { AuthContext } from '../context/AuthContext';
 
 const Product = () => {
+    const { favorites, toggleFavorite } = useContext(AuthContext);
     const { id } = useParams();
     const navigate = useNavigate();
     const [product, setProduct] = useState(null);
@@ -37,6 +40,11 @@ const Product = () => {
         fetchProduct();
         fetchMoreProducts();
     }, [id]);
+
+    const handleFavoriteClick = async () => {
+        await toggleFavorite(id); // ✅ Llamamos directamente la función del contexto
+    };
+    
 
     if (loading)
         return (
@@ -79,8 +87,21 @@ const Product = () => {
                     />
 
                     {/* Ícono de favoritos */}
-                    <button className="absolute top-2 right-2 bg-gray-100 hover:bg-red-500 text-red-500 hover:text-white h-[40px] w-[40px] rounded-full flex items-center justify-center transition-all">
-                        <i className="bi bi-heart text-[22px]"></i>
+                    <button
+                        onClick={handleFavoriteClick}
+                        className={`absolute top-2 right-2 h-[40px] w-[40px] flex items-center justify-center rounded-full transition-all ${
+                            favorites.includes(id)
+                                ? 'bg-red-500 text-white'
+                                : 'bg-gray-200 text-red-500'
+                        }`}
+                    >
+                        <i
+                            className={`bi ${
+                                favorites.includes(id)
+                                    ? 'bi-heart-fill'
+                                    : 'bi-heart'
+                            } text-[22px]`}
+                        ></i>
                     </button>
                 </div>
 

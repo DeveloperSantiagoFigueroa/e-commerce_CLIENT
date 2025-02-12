@@ -1,13 +1,13 @@
-import { createContext, useEffect } from 'react';
-import { useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { getMeFetch } from '../api/getMeFetch';
+import { addFavouriteFetch, getFavoritesFetch } from '../api/getFavoritesFetch';
 export const AuthContext = createContext();
-
-//
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [favorites, setFavorites] = useState([]); // ✅ Agregamos estado de favoritos
     const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         (async () => {
             const token = localStorage.getItem('token');
@@ -18,20 +18,34 @@ export const AuthProvider = ({ children }) => {
             try {
                 const user = await getMeFetch(token);
                 setUser(user);
+                setFavorites(user.favorites || []); // ✅ Cargamos los favoritos del usuario
             } catch (err) {
-                console.log("❌ Error al obtener usuario:", err);
-                localStorage.removeItem("token"); // ✅ Si el token es inválido, lo borramos
+                console.log('❌ Error al obtener usuario:', err);
+                localStorage.removeItem('token'); // ✅ Si el token es inválido, lo borramos
                 setUser(null);
             }
 
             setLoading(false);
         })();
     }, []);
-    // Login
+
+    // ✅ Actualizar favoritos en tiempo real
+    const toggleFavorite = async (productId) => {
+        try {
+            const response = await addFavouriteFetch(productId);
+            setFavorites(response.favorites); // ✅ Sincroniza con la respuesta del backend
+        } catch (err) {
+            console.error("Error al actualizar favoritos:", err);
+        }
+    };
+    
+
+    // ✅ Login: actualiza `user` y `favorites`
     const login = async (token) => {
         try {
-            const userData = await getMeFetch(token); // ✅ Obtiene los datos del usuario
+            const userData = await getMeFetch(token);
             setUser(userData);
+            setFavorites(userData.favorites || []); // ✅ También cargamos los favoritos
             localStorage.setItem('token', token);
         } catch (err) {
             console.log('Error al obtener usuario:', err);
@@ -39,14 +53,17 @@ export const AuthProvider = ({ children }) => {
     };
 
     const logout = () => {
-        setUser(false);
+        setUser(null);
+        setFavorites([]); // ✅ Reseteamos favoritos al cerrar sesión
         localStorage.clear();
     };
 
-    // Los datos para utilizar en todo el sitio web
     const data = {
         user,
         setUser,
+        favorites,
+        setFavorites,
+        toggleFavorite, // ✅ Agregamos la función de favoritos
         login,
         logout,
     };
