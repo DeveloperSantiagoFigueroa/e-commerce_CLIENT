@@ -26,7 +26,9 @@ const MobileMenu = ({ isOpen, onClose, onRegisterClick, onLoginClick }) => {
                     {/* Opciones del menú */}
 
                     <ul className="flex flex-col text-start ml-10 gap-6 text-[20px] -mt-6">
-                        <Link to="/"><i class="bi bi-house text-[20px] mr-2"></i>Inicio</Link>
+                         {/* Sí hay usuario logeado, que muestre su nombre */}
+                         {user && <p className='font-medium -mb-2'>{user.firstname + ' ' + user.lastname}</p>}
+                        <Link to="/"><i className="bi bi-house text-[20px] mr-2"></i>Inicio</Link>
                         {/* Sí no hay token en el localstorage (osea que no tiene sesión)
                         muestra los botones de Ingresar / Crear cuenta, caso contrario de que
                         si tenga un token y sesion ingresada, no los muestra. */}
@@ -48,8 +50,7 @@ const MobileMenu = ({ isOpen, onClose, onRegisterClick, onLoginClick }) => {
                                 </button>
                             </>
                         )}
-                        {/* Sí hay usuario logeado, que muestre su nombre */}
-                        {user && <p className='font-medium -mb-2'>{user.firstname + ' ' + user.lastname}</p>}
+                       
                         <Link to="/carrito">
                             <i className="bi bi-cart4 text-[20px] mr-2"></i>
                             Carrito
