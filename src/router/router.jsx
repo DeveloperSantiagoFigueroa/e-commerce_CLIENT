@@ -6,6 +6,7 @@ import ForgotPassword from '../pages/ForgotPassword';
 import ResetPassword from '../pages/ResetPassword';
 import Product from '../pages/Product';
 import Favorites from '../pages/Favorites';
+import Cart from '../pages/Cart';
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
             {
                 path: '/favoritos',
                 element: <Favorites />
+            },
+            {
+                path: '/carrito',
+                element: <Cart />
             },
 
             {

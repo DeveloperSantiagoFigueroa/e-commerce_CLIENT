@@ -1,7 +1,11 @@
 import { createContext, useEffect, useState } from 'react';
 import { getMeFetch } from '../api/getMeFetch';
 import { addFavouriteFetch, getFavoritesFetch } from '../api/getFavoritesFetch';
-import { addToCartFetch } from '../api/addToCartFetch';
+import {
+    addToCartFetch,
+    removeFromCartFetch,
+    clearCartFetch,
+} from '../api/addToCartFetch';
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -23,16 +27,16 @@ export const AuthProvider = ({ children }) => {
                 setFavorites(userData.favorites || []);
                 setCart(userData.cart || []);
             } catch (err) {
-                console.log("❌ Error al obtener usuario:", err);
-                if (err.message.includes("401")) { // ✅ Solo borra el token si es un error de autenticación
-                    localStorage.removeItem("token");
+                console.log('❌ Error al obtener usuario:', err);
+                if (err.message.includes('401')) {
+                    // ✅ Solo borra el token si es un error de autenticación
+                    localStorage.removeItem('token');
                     setUser(null);
                 }
             }
             setLoading(false);
         })();
     }, []);
-    
 
     // ✅ Actualizar favoritos en tiempo real
     const toggleFavorite = async (productId) => {
@@ -52,6 +56,36 @@ export const AuthProvider = ({ children }) => {
             console.error('Error al agregar al carrito:', error);
         }
     };
+
+    const removeFromCart = async (productId) => {
+        try {
+            const token = localStorage.getItem("token");
+            if (!token) return;
+    
+            const res = await removeFromCartFetch(token, productId);
+            if (res.cart) {
+                setCart(res.cart); // ✅ Actualiza el carrito en el contexto
+            }
+        } catch (error) {
+            console.error("❌ Error al eliminar producto:", error);
+        }
+    };
+    
+    const clearCart = async () => {
+        try {
+            const token = localStorage.getItem("token");
+            if (!token) return;
+    
+            const res = await clearCartFetch(token); // ✅ Llama a la API para vaciar el carrito
+    
+            if (res.cart) {
+                setCart([]); // ✅ Vacía el carrito en la UI y en la base de datos
+            }
+        } catch (error) {
+            console.error("❌ Error al vaciar el carrito:", error);
+        }
+    };
+    
 
     // ✅ Login: actualiza `user` y `favorites`
     const login = async (token) => {
@@ -83,6 +117,9 @@ export const AuthProvider = ({ children }) => {
         cart,
         setCart,
         addToCart,
+        removeFromCart,
+        clearCart,
+
     };
 
     if (loading) return null;
