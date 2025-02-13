@@ -89,7 +89,7 @@ const Product = () => {
                     {/* Ícono de favoritos */}
                     <button
                         onClick={handleFavoriteClick}
-                        className={`absolute top-2 right-2 h-[40px] w-[40px] flex items-center justify-center rounded-full transition-all ${
+                        className={`cursor-pointer absolute top-2 right-2 h-[40px] w-[40px] flex items-center justify-center rounded-full transition-all ${
                             favorites.includes(id)
                                 ? 'bg-red-500 text-white'
                                 : 'bg-gray-200 text-red-500'

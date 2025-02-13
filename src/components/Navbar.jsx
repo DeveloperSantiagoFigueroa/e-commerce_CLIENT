@@ -70,7 +70,7 @@ const Navbar = ({
         };
     }, []);
 
-    const { favorites } = useContext(AuthContext);
+    const { favorites, cart } = useContext(AuthContext);
 
     return (
         <div className="sticky top-0 z-50 bg-gradient-to-b from-[#2b2b7b] to-[#1b1b51] md:bg-none md:bg-[#2b2b7b] flex items-center justify-evenly md:justify-between md:px-15 lg:py-1 lg:justify-center lg:gap-8">
@@ -193,8 +193,15 @@ const Navbar = ({
                     </Link>
                 </div>
 
-                <div className="relative">
-                    <i className="bi bi-cart text-white text-[35px] cursor-pointer hover:text-[#ff2ed4] transition-all"></i>
+                <div className="relative hidden md:block">
+                    <Link to="/carrito" className="relative">
+                        <i className="bi bi-cart text-white text-[35px] cursor-pointer hover:text-[#ff2ed4] transition-all"></i>
+                        {cart.length > 0 && (
+                            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                                {cart.length}
+                            </span>
+                        )}
+                    </Link>
                 </div>
             </div>
 

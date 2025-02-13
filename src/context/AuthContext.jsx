@@ -1,13 +1,13 @@
 import { createContext, useEffect, useState } from 'react';
 import { getMeFetch } from '../api/getMeFetch';
 import { addFavouriteFetch, getFavoritesFetch } from '../api/getFavoritesFetch';
-import { addToCartFetch } from '../api/addToCartFetch';
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [favorites, setFavorites] = useState([]); // ✅ Agregamos estado de favoritos
     const [loading, setLoading] = useState(true);
+    const [cart, setCart] = useState([]);
 
     useEffect(() => {
         (async () => {
@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }) => {
                 const user = await getMeFetch(token);
                 setUser(user);
                 setFavorites(user.favorites || []); // ✅ Cargamos los favoritos del usuario
+                setCart(userData.cart || []); 
             } catch (err) {
                 console.log('❌ Error al obtener usuario:', err);
                 localStorage.removeItem('token'); // ✅ Si el token es inválido, lo borramos
@@ -36,20 +37,20 @@ export const AuthProvider = ({ children }) => {
             const response = await addFavouriteFetch(productId);
             setFavorites(response.favorites); // ✅ Sincroniza con la respuesta del backend
         } catch (err) {
-            console.error('Error al actualizar favoritos:', err);
+            console.error("Error al actualizar favoritos:", err);
         }
     };
-
-    const [cart, setCart] = useState([]);
 
     const addToCart = async (productId) => {
         try {
             const updatedCart = await addToCartFetch(productId);
-            setCart(updatedCart.cart); // ✅ Actualiza el carrito en el estado global
+            setCart(updatedCart.cart); // ✅ Actualiza el estado del carrito
         } catch (error) {
-            console.error('Error al agregar al carrito:', error);
+            console.error("Error al agregar al carrito:", error);
         }
     };
+    
+    
 
     // ✅ Login: actualiza `user` y `favorites`
     const login = async (token) => {
@@ -79,7 +80,7 @@ export const AuthProvider = ({ children }) => {
         logout,
         cart,
         setCart,
-        addToCart,
+
     };
 
     if (loading) return null;

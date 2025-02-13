@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getProductsFetch } from '../api/getProductsFetch';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
 
 // Productos por página en cada dispositivo
 const ITEMS_PER_PAGE = {
@@ -16,12 +15,6 @@ const Products = () => {
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(ITEMS_PER_PAGE.lg);
-
-
-    
-
-
-
 
     // Fetch de productos
     useEffect(() => {
@@ -100,13 +93,6 @@ const ProductGrid = ({ products }) => (
 const ProductCard = ({ product }) => {
     const navigate = useNavigate();
 
-
-    const {addToCart} = useContext(AuthContext);
-
-    const handleAddToCart = async (event) => {
-        event.stopPropagation();
-        await addToCart(product._id);
-    }
     return (
         <div
             className="cursor-pointer bg-white p-4 rounded-[6px] shadow-lg flex flex-col justify-between"
@@ -125,7 +111,6 @@ const ProductCard = ({ product }) => {
             <p className="text-pink-500 font-bold text-lg">
                 $USD {product.price}
             </p>
-            <button onClick={handleAddToCart} className='bg-green-500 cursor-pointer hover:bg-green-400 transition-all text-white p-2 font-bold mt-2 rounded-[8px]'>Agregar al carrito</button>
         </div>
     );
 };
