@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { getProductsFetch } from '../api/getProductsFetch';
 import { useNavigate } from 'react-router-dom';
-
+import { AuthContext } from '../context/AuthContext';
 // Productos por página en cada dispositivo
 const ITEMS_PER_PAGE = {
     lg: 15, // Web: 3 filas x 5 productos
@@ -92,7 +92,16 @@ const ProductGrid = ({ products }) => (
 // **📌 Componente de tarjeta de producto**
 const ProductCard = ({ product }) => {
     const navigate = useNavigate();
+    const { addToCart, toggleFavorite, favorites } = useContext(AuthContext);
+    const handleAddToCart = async (event) => {
+        event.stopPropagation(); // ✅ Evita que haga `navigate` al hacer clic en el botón
+        await addToCart(product._id);
+    };
 
+    const handleToggleFavorite = async (event) => {
+        event.stopPropagation(); // ✅ Evita que haga `navigate` al hacer clic en el botón
+        await toggleFavorite(product._id);
+    };
     return (
         <div
             className="cursor-pointer bg-white p-4 rounded-[6px] shadow-lg flex flex-col justify-between"
@@ -101,6 +110,23 @@ const ProductCard = ({ product }) => {
                 window.scrollTo({ top: 0, behavior: 'smooth' }); // ✅ Hace scroll arriba
             }}
         >
+            <button
+            //Quiero que este a la derecha de la tarjeta
+                onClick={handleToggleFavorite}
+                className={`cursor-pointer h-[35px] w-[35px]  hover:bg-red-300  rounded-full transition-all ${
+                    favorites.includes(product._id)
+                        ? 'bg-red-500 text-white'
+                        : 'bg-gray-200 text-red-500'
+                }`}
+            >
+                <i
+                    className={`bi ${
+                        favorites.includes(product._id)
+                            ? 'bi-heart-fill'
+                            : 'bi-heart'
+                    } text-[18px]`}
+                ></i>
+            </button>
             <img
                 src={product.mainImage}
                 alt={product.name}
@@ -111,6 +137,12 @@ const ProductCard = ({ product }) => {
             <p className="text-pink-500 font-bold text-lg">
                 $USD {product.price}
             </p>
+            <button
+                className="bg-green-500 cursor-pointer text-white p-2 font-bold mt-2 rounded-[8px]"
+                onClick={handleAddToCart} // ✅ Agrega al carrito
+            >
+                Agregar al carrito
+            </button>
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
 import { getMeFetch } from '../api/getMeFetch';
 import { addFavouriteFetch, getFavoritesFetch } from '../api/getFavoritesFetch';
+import { addToCartFetch } from '../api/addToCartFetch';
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -20,7 +21,7 @@ export const AuthProvider = ({ children }) => {
                 const user = await getMeFetch(token);
                 setUser(user);
                 setFavorites(user.favorites || []); // ✅ Cargamos los favoritos del usuario
-                setCart(userData.cart || []); 
+                setCart(userData.cart || []);
             } catch (err) {
                 console.log('❌ Error al obtener usuario:', err);
                 localStorage.removeItem('token'); // ✅ Si el token es inválido, lo borramos
@@ -37,7 +38,7 @@ export const AuthProvider = ({ children }) => {
             const response = await addFavouriteFetch(productId);
             setFavorites(response.favorites); // ✅ Sincroniza con la respuesta del backend
         } catch (err) {
-            console.error("Error al actualizar favoritos:", err);
+            console.error('Error al actualizar favoritos:', err);
         }
     };
 
@@ -46,11 +47,9 @@ export const AuthProvider = ({ children }) => {
             const updatedCart = await addToCartFetch(productId);
             setCart(updatedCart.cart); // ✅ Actualiza el estado del carrito
         } catch (error) {
-            console.error("Error al agregar al carrito:", error);
+            console.error('Error al agregar al carrito:', error);
         }
     };
-    
-    
 
     // ✅ Login: actualiza `user` y `favorites`
     const login = async (token) => {
@@ -80,7 +79,7 @@ export const AuthProvider = ({ children }) => {
         logout,
         cart,
         setCart,
-
+        addToCart,
     };
 
     if (loading) return null;
