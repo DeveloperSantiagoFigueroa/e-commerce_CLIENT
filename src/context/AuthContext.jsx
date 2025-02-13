@@ -21,11 +21,13 @@ export const AuthProvider = ({ children }) => {
                 const userData = await getMeFetch(token);
                 setUser(userData);
                 setFavorites(userData.favorites || []);
-                setCart(userData.cart || []); // ✅ Cargar el carrito correctamente
+                setCart(userData.cart || []);
             } catch (err) {
                 console.log("❌ Error al obtener usuario:", err);
-                localStorage.removeItem("token");
-                setUser(null);
+                if (err.message.includes("401")) { // ✅ Solo borra el token si es un error de autenticación
+                    localStorage.removeItem("token");
+                    setUser(null);
+                }
             }
             setLoading(false);
         })();
