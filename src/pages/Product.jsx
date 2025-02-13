@@ -2,11 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getProductByIdFetch } from '../api/getProductByIdFetch';
 import { getProductsFetch } from '../api/getProductsFetch';
-import { addFavouriteFetch, getFavoritesFetch } from '../api/getFavoritesFetch';
 import { AuthContext } from '../context/AuthContext';
 
 const Product = () => {
-    const { favorites, toggleFavorite } = useContext(AuthContext);
+    const { favorites, toggleFavorite, addToCart } = useContext(AuthContext); // ✅ Obtiene `addToCart`
     const { id } = useParams();
     const navigate = useNavigate();
     const [product, setProduct] = useState(null);
@@ -42,9 +41,14 @@ const Product = () => {
     }, [id]);
 
     const handleFavoriteClick = async () => {
-        await toggleFavorite(id); // ✅ Llamamos directamente la función del contexto
+        await toggleFavorite(id);
     };
-    
+
+    // ✅ Función para agregar manualmente al carrito
+    const handleAddToCart = async () => {
+        if (!product) return; // Si el producto aún no ha cargado, no hacer nada
+        await addToCart(product._id); // ✅ Agregar el producto al carrito
+    };
 
     if (loading)
         return (
@@ -57,9 +61,7 @@ const Product = () => {
 
     return (
         <div className="m-5 flex flex-col gap-8 md:mx-20 lg:mx-40 xl:mx-60">
-            {/* ✅ Contenedor principal del producto */}
             <div className="flex flex-col lg:flex-row gap-8">
-                {/* Miniaturas en fila (sm, md) y columna (lg) */}
                 <div className="hidden lg:flex flex-col gap-2 w-[120px]">
                     {[product.mainImage, ...product.images].map(
                         (img, index) => (
@@ -78,7 +80,6 @@ const Product = () => {
                     )}
                 </div>
 
-                {/* Imagen principal */}
                 <div className="relative w-full lg:w-[600px]">
                     <img
                         src={selectedImage}
@@ -86,7 +87,6 @@ const Product = () => {
                         className="rounded-[10px] w-full aspect-[16/9] object-contain"
                     />
 
-                    {/* Ícono de favoritos */}
                     <button
                         onClick={handleFavoriteClick}
                         className={`cursor-pointer absolute top-2 right-2 h-[40px] w-[40px] flex items-center justify-center rounded-full transition-all ${
@@ -105,7 +105,6 @@ const Product = () => {
                     </button>
                 </div>
 
-                {/* Miniaturas debajo de la imagen en móvil */}
                 <div className="flex lg:hidden gap-2 justify-center mt-3">
                     {[product.mainImage, ...product.images].map(
                         (img, index) => (
@@ -124,7 +123,6 @@ const Product = () => {
                     )}
                 </div>
 
-                {/* Información del producto */}
                 <div className="flex flex-col gap-3 lg:w-[400px]">
                     <h2 className="font-bold text-[30px]">{product.name}</h2>
                     <p className="text-gray-700 text-[14px]">
@@ -134,14 +132,15 @@ const Product = () => {
                         $USD {product.price}
                     </p>
 
-                    {/* Botón de agregar al carrito */}
-                    <button className="bg-green-500 hover:bg-green-600 rounded-[8px] text-white px-4 py-3 cursor-pointer transition-all">
+                    {/* ✅ Botón para agregar al carrito */}
+                    <button 
+                        onClick={handleAddToCart} 
+                        className="bg-green-500 hover:bg-green-600 rounded-[8px] text-white px-4 py-3 cursor-pointer transition-all">
                         Agregar al carrito
                     </button>
                 </div>
             </div>
 
-            {/* ✅ Sección "Ver más productos" - Ahora SIEMPRE estará debajo */}
             <div className="w-full mt-20">
                 <h3 className="text-xl font-bold text-gray-800 text-center mb-5">
                     Ver más productos
@@ -153,7 +152,7 @@ const Product = () => {
                             className="bg-white p-3 rounded-lg shadow-md cursor-pointer hover:shadow-xl transition-all"
                             onClick={() => {
                                 navigate(`/products/${p._id}`);
-                                window.scrollTo({ top: 0, behavior: 'smooth' }); // ✅ Hace scroll al inicio
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
                             }}
                         >
                             <img
