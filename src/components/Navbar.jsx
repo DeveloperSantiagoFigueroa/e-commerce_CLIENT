@@ -70,6 +70,8 @@ const Navbar = ({
         };
     }, []);
 
+    const { favorites } = useContext(AuthContext);
+
     return (
         <div className="sticky top-0 z-50 bg-gradient-to-b from-[#2b2b7b] to-[#1b1b51] md:bg-none md:bg-[#2b2b7b] flex items-center justify-evenly md:justify-between md:px-15 lg:py-1 lg:justify-center lg:gap-8">
             <div className="left">
@@ -119,9 +121,12 @@ const Navbar = ({
                                     className="block p-2 hover:bg-gray-200"
                                     onClick={() => {
                                         setIsExpanded(false);
-                                        setSearchTerm(""); 
-                                        window.scrollTo({ top: 0, behavior: "smooth" }); // ✅ Hace scroll arriba
-                                      }}
+                                        setSearchTerm('');
+                                        window.scrollTo({
+                                            top: 0,
+                                            behavior: 'smooth',
+                                        }); // ✅ Hace scroll arriba
+                                    }}
                                 >
                                     {product.name}
                                 </Link>
@@ -176,8 +181,16 @@ const Navbar = ({
                     )}
                 </div>
 
+                {/* Ícono de favoritos con contador */}
                 <div className="relative hidden md:block">
-                    <i className="bi bi-heart text-white text-[35px] cursor-pointer hover:text-[#ff2ed4] transition-all"></i>
+                    <Link to="/favoritos">
+                        <i className="bi bi-heart text-white text-[35px] cursor-pointer hover:text-[#ff2ed4] transition-all"></i>
+                        {favorites.length > 0 && ( // ✅ Si hay favoritos, muestra el badge
+                            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                                {favorites.length}
+                            </span>
+                        )}
+                    </Link>
                 </div>
 
                 <div className="relative">
