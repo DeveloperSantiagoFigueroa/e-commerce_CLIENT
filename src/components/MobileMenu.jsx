@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 const MobileMenu = ({ isOpen, onClose, onRegisterClick, onLoginClick }) => {
-    const { user, logout, favorites } = useContext(AuthContext);
+    const { user, logout, favorites, cart } = useContext(AuthContext);
 
     return (
         <AnimatePresence>
@@ -51,9 +51,14 @@ const MobileMenu = ({ isOpen, onClose, onRegisterClick, onLoginClick }) => {
                             </>
                         )}
                        
-                        <Link to="/carrito">
+                        <Link to="/carrito" className="relative flex items-center">
                             <i className="bi bi-cart4 text-[20px] mr-2"></i>
                             Carrito
+                            {cart.length > 0 && (
+                                <span className="absolute -top-2 left-2 bg-red-500 text-white text-[13px] font-bold w-5 h-5 flex items-center justify-center rounded-full">
+                                    {cart.length}
+                                </span>
+                            )}
                         </Link>
                         <Link to="/favoritos" className="relative flex items-center">
                             <i className="bi bi-bag-heart text-[20px] mr-2"></i>
