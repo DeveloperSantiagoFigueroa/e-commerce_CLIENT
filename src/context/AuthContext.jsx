@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
 import { getMeFetch } from '../api/getMeFetch';
 import { addFavouriteFetch, getFavoritesFetch } from '../api/getFavoritesFetch';
+import { addToCartFetch } from '../api/addToCartFetch';
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -35,10 +36,20 @@ export const AuthProvider = ({ children }) => {
             const response = await addFavouriteFetch(productId);
             setFavorites(response.favorites); // ✅ Sincroniza con la respuesta del backend
         } catch (err) {
-            console.error("Error al actualizar favoritos:", err);
+            console.error('Error al actualizar favoritos:', err);
         }
     };
-    
+
+    const [cart, setCart] = useState([]);
+
+    const addToCart = async (productId) => {
+        try {
+            const updatedCart = await addToCartFetch(productId);
+            setCart(updatedCart.cart); // ✅ Actualiza el carrito en el estado global
+        } catch (error) {
+            console.error('Error al agregar al carrito:', error);
+        }
+    };
 
     // ✅ Login: actualiza `user` y `favorites`
     const login = async (token) => {
@@ -66,6 +77,9 @@ export const AuthProvider = ({ children }) => {
         toggleFavorite, // ✅ Agregamos la función de favoritos
         login,
         logout,
+        cart,
+        setCart,
+        addToCart,
     };
 
     if (loading) return null;
