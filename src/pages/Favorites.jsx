@@ -46,7 +46,7 @@ const Favorites = () => {
                         No tienes productos en favoritos.
                     </p>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-2 gap-6 mt-6">
                         {favoriteProducts.map((product) => (
                             <div
                                 key={product._id}
@@ -76,15 +76,9 @@ const Favorites = () => {
                             </div>
                         ))}
                     </div>
+                    
                 )}
             </div>
-
-            {/* 🛒 Botón de Comprar */}
-            {favoriteProducts.length > 0 && (
-                <div className="fixed bottom-0 left-0 right-0 p-3 m-5 text-white font-bold text-[20px] bg-green-500 flex justify-center items-center">
-                    <button>Comprar</button>
-                </div>
-            )}
         </>
     );
 };
