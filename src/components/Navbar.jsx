@@ -181,11 +181,11 @@ const Navbar = ({
                     )}
                 </div>
 
-                {/* Ícono de favoritos con contador */}
+                {/* ❤️ Ícono de favoritos con badge */}
                 <div className="relative hidden md:block">
-                    <Link to="/favoritos">
+                    <Link to="/favoritos" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
                         <i className="bi bi-heart text-white text-[35px] cursor-pointer hover:text-[#ff2ed4] transition-all"></i>
-                        {favorites.length > 0 && ( // ✅ Si hay favoritos, muestra el badge
+                        {favorites.length > 0 && (
                             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
                                 {favorites.length}
                             </span>
@@ -193,8 +193,9 @@ const Navbar = ({
                     </Link>
                 </div>
 
-                <div className="relative hidden md:block">
-                    <Link to="/carrito" className="relative">
+                {/* 🛒 Ícono de carrito con badge */}
+                <div className="relative">
+                    <Link to="/carrito" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
                         <i className="bi bi-cart text-white text-[35px] cursor-pointer hover:text-[#ff2ed4] transition-all"></i>
                         {cart.length > 0 && (
                             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">

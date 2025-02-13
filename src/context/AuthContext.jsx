@@ -18,19 +18,19 @@ export const AuthProvider = ({ children }) => {
                 return;
             }
             try {
-                const user = await getMeFetch(token);
-                setUser(user);
-                setFavorites(user.favorites || []); // ✅ Cargamos los favoritos del usuario
-                setCart(userData.cart || []);
+                const userData = await getMeFetch(token);
+                setUser(userData);
+                setFavorites(userData.favorites || []);
+                setCart(userData.cart || []); // ✅ Cargar el carrito correctamente
             } catch (err) {
-                console.log('❌ Error al obtener usuario:', err);
-                localStorage.removeItem('token'); // ✅ Si el token es inválido, lo borramos
+                console.log("❌ Error al obtener usuario:", err);
+                localStorage.removeItem("token");
                 setUser(null);
             }
-
             setLoading(false);
         })();
     }, []);
+    
 
     // ✅ Actualizar favoritos en tiempo real
     const toggleFavorite = async (productId) => {
@@ -57,6 +57,7 @@ export const AuthProvider = ({ children }) => {
             const userData = await getMeFetch(token);
             setUser(userData);
             setFavorites(userData.favorites || []); // ✅ También cargamos los favoritos
+            setCart(userData.cart || []); // ✅ Cargar el carrito correctamente
             localStorage.setItem('token', token);
         } catch (err) {
             console.log('Error al obtener usuario:', err);

@@ -46,7 +46,7 @@ const Favorites = () => {
                         No tienes productos en favoritos.
                     </p>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-2 gap-6 mt-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-2 lg:mx-60 gap-6 mt-6">
                         {favoriteProducts.map((product) => (
                             <div
                                 key={product._id}
