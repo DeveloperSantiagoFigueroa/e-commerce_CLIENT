@@ -170,26 +170,53 @@ const Cart = () => {
                     </div>
 
                     {/* 📌 Resumen del pedido */}
-                    <div className="w-full lg:w-[300px] bg-gray-200 p-5 rounded-lg shadow-md">
+                    <div className="w-full lg:w-[300px] bg-gray-200 p-6 rounded-lg shadow-md">
                         <h2 className="text-xl font-bold text-gray-800">
                             Resumen
                         </h2>
                         <hr className="my-3" />
-                        <div className="mt-3 flex justify-between">
-                            <span>Subtotal:</span>
-                            <span className="font-semibold">
-                                ${totalPrice.toFixed(2)}
-                            </span>
+
+                        {/* 📌 Lista de productos en el resumen */}
+                        <div className="mt-3 space-y-2">
+                            {cart.map((item) => (
+                                <div
+                                    key={item.product._id}
+                                    className="flex justify-between text-sm"
+                                >
+                                    <span className="text-gray-700">
+                                        {item.product.name} x {item.quantity}
+                                    </span>
+                                    <span className="font-semibold">
+                                        $
+                                        {item.product.price
+                                            ? (
+                                                  parseFloat(
+                                                      item.product.price
+                                                  ) * item.quantity
+                                              ).toFixed(2)
+                                            : '0.00'}
+                                    </span>
+                                </div>
+                            ))}
                         </div>
 
-                        <button className="mt-4 font-bold text-white bg-green-500 px-3 py-2 w-[100%] rounded-lg hover:bg-green-600 transition-all">
+                        <hr className="my-3" />
+
+                        {/* 💰 Subtotal Final */}
+                        <div className="mt-3 flex justify-between text-lg font-bold">
+                            <span>Total:</span>
+                            <span>${totalPrice.toFixed(2)}</span>
+                        </div>
+
+                        {/* ✅ Botón para pagar */}
+                        <button className="mt-4 font-bold text-white bg-green-500 px-3 py-2 w-full rounded-lg hover:bg-green-600 transition-all">
                             Proceder al Pago
                         </button>
 
-                        {/* 🗑 Vaciar carrito */}
+                        {/* 🗑 Botón para vaciar carrito */}
                         <button
                             onClick={handleClearCart}
-                            className="mt-2 font-bold text-white bg-red-500 px-3 py-2 w-[100%] rounded-lg hover:bg-red-600 transition-all"
+                            className="mt-2 font-bold text-white bg-red-500 px-3 py-2 w-full rounded-lg hover:bg-red-600 transition-all"
                         >
                             Vaciar Carrito
                         </button>
