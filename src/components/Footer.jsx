@@ -2,7 +2,7 @@ import React from 'react';
 import Logo from '../images/Logo.webp';
 import LogoQR from '../images/qr.webp';
 import { Link } from 'react-router-dom';
-const Footer = ({openRegisterModal}) => {
+const Footer = ({openRegisterModal, openLoginModal}) => {
     return (
         <footer className="bg-gradient-to-b from-[#2b2b7b] to-[#1b1b51] py-15 df">
             {/* Layout Desktop */}
@@ -18,9 +18,7 @@ const Footer = ({openRegisterModal}) => {
                     <p onClick={openRegisterModal} className="hover:underline cursor-pointer">
                         Crear cuenta
                     </p>
-                    <Link to='/' className="hover:underline">
-                        Ingresar
-                    </Link>
+                    <p onClick={openLoginModal} className='hover:underline cursor-pointer'>Ingresar</p>
                     <Link to='/' className="hover:underline">
                         Soporte
                     </Link>

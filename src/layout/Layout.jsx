@@ -38,7 +38,7 @@ const Layout = () => {
                 openLoginModal={openLoginModal}
             />
             <Outlet />
-            <Footer openRegisterModal={openRegisterModal} />
+            <Footer openRegisterModal={openRegisterModal} openLoginModal={openLoginModal} />
             {isRegisterModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start z-50 h-screen w-screen overflow-y-auto">
                     <div className="w-full h-full flex justify-center">
