@@ -15,10 +15,10 @@ const Checkout = () => {
         address: ""
     });
 
-    // **Calcular total**
+    //  Calc total
     const totalPrice = cart.reduce((acc, item) => acc + (parseFloat(item.product?.price) || 0) * item.quantity, 0);
 
-    //  **Validaciones con Regex**
+    // Validaciones regex para el form
     const validateForm = () => {
         let newErrors = {};
 
@@ -46,7 +46,7 @@ const Checkout = () => {
         return Object.keys(newErrors).length === 0;
     };
 
-    // 📌 **Manejar cambios en los inputs**
+    // Manejo de cambios en los inputs
     const handleChange = (e) => {
         let { name, value } = e.target;
 
@@ -62,7 +62,7 @@ const Checkout = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    // **Simulación de pago**
+    // Simulacion de pago
     const handlePayment = (e) => {
         e.preventDefault();
         if (!validateForm()) return;
@@ -151,7 +151,7 @@ const Checkout = () => {
                         </div>
                     </div>
 
-                    {/* **Opciones de envío** */}
+                    {/* Opciones de envío */}
                     <div>
                         <label className="text-gray-700 font-semibold">Método de envío</label>
                         <div className="flex gap-4 mt-2">
@@ -187,12 +187,14 @@ const Checkout = () => {
                         </div>
                     )}
 
-                    {/* *Resumen de compra** */}
+                    {/* **Resumen de compra** */}
                     <div className="bg-gray-200 p-4 rounded-lg mt-4">
                         <h3 className="text-lg font-bold text-gray-700 mb-2">🛒 Resumen del pedido</h3>
                         {cart.map((item) => (
                             <p key={item.product._id}>{item.product.name} x{item.quantity} - ${item.product.price * item.quantity}</p>
                         ))}
+                        <hr className="my-2" />
+                        <p className="font-bold text-gray-800">Total: ${totalPrice.toFixed(2)}</p>
                     </div>
 
                     <button type="submit" className="mt-4 bg-blue-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600 transition-all">
