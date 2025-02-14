@@ -51,7 +51,7 @@ const ForgotPassword = () => {
             </h1>
             <hr className="text-white" />
 
-            <form className="flex flex-col gap-7" onSubmit={handleSubmit}> {/* ✅ Ahora el formulario maneja onSubmit */}
+            <form className="flex flex-col gap-7" onSubmit={handleSubmit}>
                 <div className="text-white flex flex-col gap-1">
                     <p className="font-medium z-10">Email:</p>
                     <input
