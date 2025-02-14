@@ -1,4 +1,4 @@
-export const getProductByIdFetch = async (id) => { // Se agrega `id` como parámetro
+export const getProductByIdFetch = async (id) => { 
     const url = `http://localhost:5000/api/products/${id}`;
     const params = {
         method: "GET",

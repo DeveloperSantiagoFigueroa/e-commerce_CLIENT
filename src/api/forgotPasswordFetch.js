@@ -7,7 +7,7 @@ export const forgotPasswordFetch = async (data) => {
 
     const contentType = response.headers.get("content-type");
 
-    // 🔥 Evitar error de JSON si la respuesta no es JSON
+    //  Evita error de JSON si la respuesta no es JSON
     if (!response.ok) {
         if (contentType && contentType.includes("application/json")) {
             const error = await response.json();

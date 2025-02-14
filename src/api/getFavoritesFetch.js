@@ -16,11 +16,11 @@ export const getFavoritesFetch = async () => {
 export const addFavouriteFetch = async (productId) => {
     const token = localStorage.getItem("token");
 
-    const response = await fetch("http://localhost:5000/api/user/favorite", { // ✅ Ruta corregida
+    const response = await fetch("http://localhost:5000/api/user/favorite", { 
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            Authorization: token, // ✅ Sin "Bearer"
+            Authorization: token, 
         },
         body: JSON.stringify({ productId }),
     });

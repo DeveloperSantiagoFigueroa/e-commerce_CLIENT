@@ -14,7 +14,7 @@ export const getMeFetch = async (token) => {
     const data = await response.json();
     return {
         ...data,
-        favorites: data.favorites || [], // ✅ Asegura que siempre tenga un array
-        cart: data.cart || [], // ✅ Asegura que siempre tenga un array
+        favorites: data.favorites || [], 
+        cart: data.cart || [], 
     };
 };
