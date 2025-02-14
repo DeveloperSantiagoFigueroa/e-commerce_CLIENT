@@ -7,6 +7,7 @@ import ResetPassword from '../pages/ResetPassword';
 import Product from '../pages/Product';
 import Favorites from '../pages/Favorites';
 import Cart from '../pages/Cart';
+import Featured from '../pages/Featured';
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
             {
                 path: '/carrito',
                 element: <Cart />
+            },
+            {
+                path: '/destacados',
+                element: <Featured />
             },
 
             {
