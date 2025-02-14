@@ -1,48 +1,83 @@
+# E-Commerce Client
 
-# 🌐 E-Commerce 🛒
-#### Proyecto fin de curso - Academia DevSchool
-Incluye funcionalidades clave como inicio de sesión, registro, búsqueda de productos, carrito de compras, favoritos y más.
+Este proyecto es un cliente de e-commerce desarrollado con React, TailwindCSS y Vite. Permite a los usuarios navegar, buscar, agregar productos al carrito, gestionar favoritos, y realizar compras simuladas.
 
+## Características
 
-## 📌 Características principales
+- **Navegación**: Los usuarios pueden navegar por diferentes categorías de productos.
+- **Búsqueda**: Barra de búsqueda en tiempo real para encontrar productos.
+- **Carrito de Compras**: Agrega, elimina y ajusta la cantidad de productos en el carrito.
+- **Favoritos**: Guarda productos en una lista de favoritos.
+- **Autenticación**: Registro, inicio de sesión y restablecimiento de contraseña.
+- **Pago Simulado**: Simulación de pago con tarjeta de crédito.
+- **Soporte y Contacto**: Sección de ayuda y formulario de contacto.
 
-- **Autenticación**: Inicio de sesión y registro mediante modal, recuperación de contraseña.
-- **Búsqueda dinámica**: La barra de búsqueda se activa al hacer clic y muestra resultados dinámicos.
-- **Navegación Sticky**: El menú de navegación permanece fijo en la parte superior.
-- **Carrito de compras**: Muestra la cantidad de productos agregados mediante un badge.
-- **Favoritos**: Los productos pueden agregarse a favoritos y se muestra la cantidad total en un badge.
-- **Páginas adicionales**:
-  - Página de producto.
-  - Página de favoritos.
-  - Página de carrito con listado de productos, opciones de pago y envío.
-  - Página de resultados de búsqueda con link a consultas predefinidas.
-- **Diseño responsivo**:
-  - 📺 **Web**: 3 filas con 5 productos por fila.
-  - 📱 **Tablet**: 4 filas con 3 productos por fila.
-  - 📲 **Móvil**: 5 filas con 2 productos por fila.
-- **Footer adaptable**:
-  - 🖥 **Web**: Logo a la izquierda, columnas de links, redes sociales, contacto y QR.
-  - 📱 **Móvil**: Redes sociales y logo centrados.
+## Estructura del Proyecto
 
-## 🛠 Tecnologías utilizadas
+- `src/`
+  - `api/`: Funciones para interactuar con la API backend.
+  - `components/`: Componentes reutilizables de React.
+  - `context/`: Contexto de autenticación.
+  - `layout/`: Layout principal del proyecto.
+  - `pages/`: Páginas principales del sitio.
+  - `router/`: Configuración de rutas.
+  - `images/`: Imágenes utilizadas en el proyecto.
+  - `main.jsx`: Punto de entrada principal.
+  - `main.css`: Estilos globales.
 
-### Frontend  
-- Vite
-- ReactJS
-- TailwindCSS
-- Bootstrap Icons
-- Framer Motion
-- React Router
+## Instalación
 
-### Backend  
-- NodeJS
-- ExpressJS
-- JWT
-- Mongoose
-- 
+1. Clona el repositorio:
+   ```sh
+   git clone <URL_DEL_REPOSITORIO>
+   ```
+2. Navega al directorio del proyecto:
+   ```sh
+   cd e-commerce_CLIENT
+   ```
+3. Instala las dependencias:
+   ```sh
+   npm install
+   ```
 
-### Base de datos  
-- MongoDB
+## Scripts
 
-### Autenticación  
-- JWT / JSON Web Token
+- `npm run dev`: Inicia el servidor de desarrollo.
+- `npm run build`: Construye el proyecto para producción.
+- `npm run lint`: Ejecuta el linter.
+- `npm run preview`: Previsualiza la construcción de producción.
+
+## Dependencias
+
+- **React**: Biblioteca principal para construir la interfaz de usuario.
+- **React Router DOM**: Manejo de rutas.
+- **TailwindCSS**: Framework de CSS para estilos.
+- **Framer Motion**: Animaciones.
+- **Bootstrap Icons**: Iconos.
+- **Swiper**: Carrusel de productos.
+
+## Desarrollo
+
+Para contribuir al desarrollo del proyecto, sigue estos pasos:
+
+1. Crea una rama nueva:
+   ```sh
+   git checkout -b feature/nueva-funcionalidad
+   ```
+2. Realiza tus cambios y haz commits:
+   ```sh
+   git commit -m "Descripción de los cambios"
+   ```
+3. Sube tus cambios:
+   ```sh
+   git push origin feature/nueva-funcionalidad
+   ```
+4. Abre un Pull Request en GitHub.
+
+## Licencia
+
+Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
+
+## Contacto
+
+Para cualquier consulta o soporte, puedes contactarnos en soporte@marketfree.com.
