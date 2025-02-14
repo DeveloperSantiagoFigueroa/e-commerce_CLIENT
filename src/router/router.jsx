@@ -9,6 +9,8 @@ import Favorites from '../pages/Favorites';
 import Cart from '../pages/Cart';
 import Featured from '../pages/Featured';
 import Checkout from '../pages/Checkout';
+import Help from '../pages/Help';
+import Contacto from '../pages/Contacto';
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -21,19 +23,29 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/favoritos',
-                element: <Favorites />
+                element: <Favorites />,
             },
             {
                 path: '/carrito',
-                element: <Cart />
+                element: <Cart />,
             },
             {
                 path: '/destacados',
-                element: <Featured />
+                element: <Featured />,
             },
             {
                 path: '/pagar',
-                element: <Checkout />
+                element: <Checkout />,
+            },
+
+            {
+                path: '/ayuda',
+                element: <Help />,
+            },
+
+            {
+                path: '/contacto',
+                element: <Contacto />,
             },
 
             {

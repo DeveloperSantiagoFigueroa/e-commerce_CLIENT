@@ -12,7 +12,7 @@ const Footer = ({openRegisterModal, openLoginModal}) => {
                 </div>
 
                 <div className="flex flex-col">
-                    <Link to="/" className="hover:underline">
+                    <Link to="/ayuda" className="hover:underline">
                         Ayuda
                     </Link>
                     <p onClick={openRegisterModal} className="hover:underline cursor-pointer">

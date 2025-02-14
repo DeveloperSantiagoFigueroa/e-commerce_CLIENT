@@ -22,9 +22,9 @@ const SubNav = ({ openRegisterModal, openLoginModal }) => {
                 >
                     Favoritos
                 </Link>
-                <a href="#" className="hover:text-[#ff2ed4] transition-all">
+                <Link to="/ayuda" className="hover:text-[#ff2ed4] transition-all">
                     Ayuda
-                </a>
+                </Link>
             </div>
 
             <div className="flex gap-5">
