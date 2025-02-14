@@ -63,7 +63,7 @@ const Featured = () => {
                     Productos Destacados
                 </h2>
 
-                {/* ✅ Swiper.js - Carrusel de productos aleatorios */}
+                {/*  Swiper.js - Carrusel de productos aleatorios */}
                 <Swiper
                     slidesPerView={1}
                     spaceBetween={20}
@@ -118,28 +118,23 @@ const Featured = () => {
 
             <div className="w-full lg:w-1/4 hidden lg:block">
                 <div className="bg-gray-200 p-4 rounded-lg shadow-md">
-                    <h3 className="text-xl font-bold text-gray-800 text-center mb-3">
-                        Publicidad
-                    </h3>
-                    
-            
-    
-                    <img
-                        src={PublicidadAcademia}
-                        alt="Publicidad"
-                        className="w-full rounded-md"
-                    />
+                    <a href="https://devschool.com.ar/" target="blank">
+                        <img
+                            src={PublicidadAcademia}
+                            alt="Publicidad"
+                            className="w-full rounded-md"
+                        />
+                    </a>
                 </div>
 
                 <div className="bg-gray-200 p-4 rounded-lg shadow-md mt-4">
-                    <h3 className="text-xl font-bold text-gray-800 text-center mb-3">
-                        Publicidad
-                    </h3>
-                    <img
-                        src={PublicidadHorsepower}
-                        alt="Publicidad"
-                        className="w-full rounded-md"
-                    />
+                    <a href="https://www.instagram.com/uy.horsepower/" target='blank'>
+                        <img
+                            src={PublicidadHorsepower}
+                            alt="Publicidad"
+                            className="w-full rounded-md"
+                        />
+                    </a>
                 </div>
             </div>
         </div>
