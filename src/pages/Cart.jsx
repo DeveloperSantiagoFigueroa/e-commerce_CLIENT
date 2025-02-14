@@ -5,6 +5,7 @@ import {
     removeFromCartFetch,
     clearCartFetch,
 } from '../api/addToCartFetch';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
     const { cart, setCart } = useContext(AuthContext);
@@ -209,9 +210,9 @@ const Cart = () => {
                         </div>
 
                         {/* ✅ Botón para pagar */}
-                        <button className="mt-4 font-bold text-white bg-green-500 px-3 py-2 w-full rounded-lg hover:bg-green-600 transition-all">
+                        <Link to='/pagar' className="block text-center mt-4 font-bold text-white bg-green-500 px-3 py-2 w-full rounded-lg hover:bg-green-600 transition-all">
                             Proceder al Pago
-                        </button>
+                        </Link>
 
                         {/* 🗑 Botón para vaciar carrito */}
                         <button

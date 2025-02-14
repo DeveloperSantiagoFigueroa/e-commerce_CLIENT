@@ -8,6 +8,7 @@ import Product from '../pages/Product';
 import Favorites from '../pages/Favorites';
 import Cart from '../pages/Cart';
 import Featured from '../pages/Featured';
+import Checkout from '../pages/Checkout';
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
             {
                 path: '/destacados',
                 element: <Featured />
+            },
+            {
+                path: '/pagar',
+                element: <Checkout />
             },
 
             {
