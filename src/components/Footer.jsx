@@ -19,27 +19,28 @@ const Footer = ({openRegisterModal, openLoginModal}) => {
                         Crear cuenta
                     </p>
                     <p onClick={openLoginModal} className='hover:underline cursor-pointer'>Ingresar</p>
-                    <Link to='/' className="hover:underline">
-                        Soporte
-                    </Link>
-                    <Link to='/' className="hover:underline">
+
+                    <Link to='/reestablecer-contraseña' className="hover:underline">
                         Ólvide mi contraseña
+                    </Link>
+                    <Link to='/' className="hover:cursor-not-allowed text-gray-500">
+                        Soporte
                     </Link>
                 </div>
                 <div className="flex flex-col">
-                    <Link to='/' className="hover:underline">
+                    <Link to='/' className="hover:cursor-not-allowed text-gray-500">
                         Ofertas
                     </Link>
-                    <Link to='/' className="hover:underline">
+                    <Link to='/' className="hover:cursor-not-allowed text-gray-500">
                         Envíos
                     </Link>
-                    <Link to='/' className="hover:underline">
+                    <Link to='/' className="hover:cursor-not-allowed text-gray-500">
                         Términos y condiciones
                     </Link>
-                    <Link to='/' className="hover:underline">
+                    <Link to='/' className="hover:cursor-not-allowed text-gray-500">
                         Reportar
                     </Link>
-                    <Link to='/' className="hover:underline">
+                    <Link to='/' className="hover:cursor-not-allowed text-gray-500">
                         Como comprar
                     </Link>
                 </div>
@@ -51,16 +52,16 @@ const Footer = ({openRegisterModal, openLoginModal}) => {
                     <img src={LogoQR} className="w-10 ml-3" />
                 </div>
                 <div className="flex flex-col">
-                    <Link to='/' className="hover:underline">
+                    <Link to='/' className="hover:cursor-not-allowed text-gray-500">
                         Política de privacidad
                     </Link>
-                    <Link to='/' className="hover:underline">
+                    <Link to='/' className="hover:cursor-not-allowed text-gray-500">
                         Cookies
                     </Link>
-                    <Link to='/' className="hover:underline">
+                    <Link to='/' className="hover:cursor-not-allowed text-gray-500">
                         Acerca de nosotros
                     </Link>
-                    <Link to='/' className="hover:underline">
+                    <Link to='/' className="hover:cursor-not-allowed text-gray-500">
                         Contacto
                     </Link>
                 </div>

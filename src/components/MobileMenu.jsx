@@ -69,11 +69,7 @@ const MobileMenu = ({ isOpen, onClose, onRegisterClick, onLoginClick }) => {
                                 </span>
                             )}
                         </Link>
-                        <Link to="/mis-compras">
-                            <i className="bi bi-wallet2 text-[20px] mr-2"></i>
-                            Mis compras
-                        </Link>
-                        <Link to="/destacado">
+                        <Link to="/destacados">
                             <i className="bi bi-stars text-[20px] mr-2"></i>
                             Destacado
                         </Link>
@@ -103,17 +99,11 @@ const MobileMenu = ({ isOpen, onClose, onRegisterClick, onLoginClick }) => {
                         <div className="flex flex-col text-gray-400 text-[15px] gap-5 border-t-1 border-gray-600 mr-10">
                             <Link
                                 to="/reestablecer-contraseña"
-                                className="mt-6"
+                                className="mt-6 mb-6"
                             >
                                 Ólvide mi contraseña
                             </Link>
-                            <Link to="/como-comprar">Como comprar</Link>
-                            <Link to="/terminos-y-condiciones">
-                                Términos y condiciones
-                            </Link>
-                            <Link to="/empresa" className="pb-5">
-                                Acerca de nosotros
-                            </Link>
+                            
                         </div>
                     </ul>
                 </motion.div>
