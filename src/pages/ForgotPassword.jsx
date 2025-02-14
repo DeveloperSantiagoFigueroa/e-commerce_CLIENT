@@ -47,7 +47,7 @@ const ForgotPassword = () => {
             </div>
 
             <h1 className="text-white font-medium text-center text-[35px] -mt-8">
-                Recuperar contraseña
+                Reestablecer contraseña
             </h1>
             <hr className="text-white" />
 

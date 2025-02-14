@@ -157,9 +157,9 @@ const Navbar = ({
                                     >
                                         Cerrar sesión
                                     </button>
-                                    <button className="w-full px-4 py-2 text-black hover:bg-gray-300">
+                                    <Link to='/reestablecer-contraseña' className="w-full px-4 py-2 text-black hover:bg-gray-300">
                                         Cambiar contraseña
-                                    </button>
+                                    </Link>
                                 </>
                             ) : (
                                 <>
