@@ -61,7 +61,7 @@ const Footer = ({openRegisterModal, openLoginModal}) => {
                     <Link to='/' className="hover:cursor-not-allowed text-gray-500">
                         Acerca de nosotros
                     </Link>
-                    <Link to='/' className="hover:cursor-not-allowed text-gray-500">
+                    <Link to='/contacto' className="hover:underline">
                         Contacto
                     </Link>
                 </div>

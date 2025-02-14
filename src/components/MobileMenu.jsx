@@ -99,11 +99,17 @@ const MobileMenu = ({ isOpen, onClose, onRegisterClick, onLoginClick }) => {
                         <div className="flex flex-col text-gray-400 text-[15px] gap-5 border-t-1 border-gray-600 mr-10">
                             <Link
                                 to="/reestablecer-contraseña"
-                                className="mt-6 mb-6"
+                                className="mt-6"
                             >
                                 Ólvide mi contraseña
                             </Link>
-                            
+                            <Link to="/como-comprar" className='text-gray-700'>Como comprar</Link>
+                            <Link to="/terminos-y-condiciones" className='text-gray-700'>
+                                Términos y condiciones
+                            </Link>
+                            <Link to="/empresa" className="pb-5 text-gray-700">
+                                Acerca de nosotros
+                            </Link>
                         </div>
                     </ul>
                 </motion.div>

@@ -13,9 +13,9 @@ const SubNav = ({ openRegisterModal, openLoginModal }) => {
                 >
                     Destacados
                 </Link>
-                <a href="#" className="hover:text-[#ff2ed4] transition-all">
+                <Link to="/contacto" className="hover:text-[#ff2ed4] transition-all">
                     Contacto
-                </a>
+                </Link>
                 <Link
                     to="/favoritos"
                     className="hover:text-[#ff2ed4] transition-all"
@@ -52,7 +52,7 @@ const SubNav = ({ openRegisterModal, openLoginModal }) => {
                         <p className="font-medium text-pink-500">{`${user.firstname} ${user.lastname}`}</p>
                         <a
                             href="#"
-                            className="hover:text-[#ff2ed4] transition-all"
+                            className="hover:text-[#ff2ed4] hover:cursor-not-allowed transition-all"
                         >
                             Mis compras
                         </a>
