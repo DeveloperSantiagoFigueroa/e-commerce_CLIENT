@@ -1,26 +1,29 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { getProductsFetch } from '../api/getProductsFetch';
+import { getProductsByCategoryFetch } from '../api/getProductsByCategoryFetch';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+
 // Productos por página en cada dispositivo
 const ITEMS_PER_PAGE = {
-    lg: 15, // Web: 3 filas x 5 productos
-    md: 12, // Tablet: 4 filas x 3 productos
-    sm: 10, // Celular: 5 filas x 2 productos
+    lg: 15,
+    md: 12,
+    sm: 10,
 };
 
-const Products = () => {
+const Products = ({ category }) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(ITEMS_PER_PAGE.lg);
 
-    // Fetch de productos
+    // ✅ Fetch de productos dinámico (todos o por categoría)
     useEffect(() => {
         const fetchProducts = async () => {
+            setLoading(true);
             try {
-                const data = await getProductsFetch();
+                const data = category ? await getProductsByCategoryFetch(category) : await getProductsFetch();
                 setProducts(data);
             } catch (err) {
                 setError(err.message);
@@ -30,18 +33,14 @@ const Products = () => {
         };
 
         fetchProducts();
-    }, []);
+    }, [category]); // Se ejecuta cada vez que cambia la categoría
 
-    // Cuando hice este codigo solo lo entendia dios y yo, ahora solo dios lo entiende
+    // 📌 Cambiar cantidad de productos según el tamaño de pantalla
     useEffect(() => {
         const updateItemsPerPage = () => {
             const width = window.innerWidth;
             setItemsPerPage(
-                width >= 1024
-                    ? ITEMS_PER_PAGE.lg
-                    : width >= 768
-                    ? ITEMS_PER_PAGE.md
-                    : ITEMS_PER_PAGE.sm
+                width >= 1024 ? ITEMS_PER_PAGE.lg : width >= 768 ? ITEMS_PER_PAGE.md : ITEMS_PER_PAGE.sm
             );
         };
 
@@ -51,30 +50,27 @@ const Products = () => {
         return () => window.removeEventListener('resize', updateItemsPerPage);
     }, []);
 
-    // Cálculo de paginación
+    // 📌 Paginación
     const totalPages = Math.ceil(products.length / itemsPerPage);
     const start = (currentPage - 1) * itemsPerPage;
     const currentProducts = products.slice(start, start + itemsPerPage);
 
-    // Resetear página si cambia el tamaño de pantalla
+    // Resetear página si cambia la categoría
     useEffect(() => {
         setCurrentPage(1);
-    }, [itemsPerPage]);
+    }, [category]);
 
-    if (loading) return null;
+    if (loading) return <p className="text-center text-[30px]">Cargando productos...</p>;
     if (error) return <p className="text-center text-[30px]">Error: {error}</p>;
 
     return (
         <div className="p-4 bg-gradient-to-b from-[#ff2ad9] to-[#2b2b7b]">
             <ProductGrid products={currentProducts} />
-
             <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPrev={() => setCurrentPage((p) => Math.max(p - 1, 1))}
-                onNext={() =>
-                    setCurrentPage((p) => Math.min(p + 1, totalPages))
-                }
+                onNext={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
             />
         </div>
     );
@@ -93,54 +89,38 @@ const ProductGrid = ({ products }) => (
 const ProductCard = ({ product }) => {
     const navigate = useNavigate();
     const { addToCart, toggleFavorite, favorites } = useContext(AuthContext);
+
     const handleAddToCart = async (event) => {
-        event.stopPropagation(); // ✅ Evita que haga `navigate` al hacer clic en el botón
+        event.stopPropagation();
         await addToCart(product._id);
     };
 
     const handleToggleFavorite = async (event) => {
-        event.stopPropagation(); // ✅ Evita que haga `navigate` al hacer clic en el botón
+        event.stopPropagation();
         await toggleFavorite(product._id);
     };
+
     return (
         <div
             className="cursor-pointer bg-white p-4 rounded-[6px] shadow-lg flex flex-col justify-between"
             onClick={() => {
                 navigate(`/products/${product._id}`);
-                window.scrollTo({ top: 0, behavior: 'smooth' }); // ✅ Hace scroll arriba
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
         >
             <button
-            //Quiero que este a la derecha de la tarjeta
                 onClick={handleToggleFavorite}
-                className={`cursor-pointer h-[35px] w-[35px]  hover:bg-red-300  rounded-full transition-all ${
-                    favorites.includes(product._id)
-                        ? 'bg-red-500 text-white'
-                        : 'bg-gray-200 text-red-500'
+                className={`cursor-pointer h-[35px] w-[35px] hover:bg-red-300 rounded-full transition-all ${
+                    favorites.includes(product._id) ? 'bg-red-500 text-white' : 'bg-gray-200 text-red-500'
                 }`}
             >
-                <i
-                    className={`bi ${
-                        favorites.includes(product._id)
-                            ? 'bi-heart-fill'
-                            : 'bi-heart'
-                    } text-[18px]`}
-                ></i>
+                <i className={`bi ${favorites.includes(product._id) ? 'bi-heart-fill' : 'bi-heart'} text-[18px]`}></i>
             </button>
-            <img
-                src={product.mainImage}
-                alt={product.name}
-                className="w-full h-40 object-contain mb-2"
-            />
+            <img src={product.mainImage} alt={product.name} className="w-full h-40 object-contain mb-2" />
             <h3 className="text-lg font-semibold">{product.name}</h3>
             <p className="text-gray-500 text-sm">{product.description}</p>
-            <p className="text-pink-500 font-bold text-lg">
-                $USD {product.price}
-            </p>
-            <button
-                className="bg-green-500 cursor-pointer text-white p-2 font-bold mt-2 rounded-[8px]"
-                onClick={handleAddToCart} // ✅ Agrega al carrito
-            >
+            <p className="text-pink-500 font-bold text-lg">$USD {product.price}</p>
+            <button className="bg-green-500 cursor-pointer text-white p-2 font-bold mt-2 rounded-[8px]" onClick={handleAddToCart}>
                 Agregar al carrito
             </button>
         </div>
@@ -153,15 +133,8 @@ const Pagination = ({ currentPage, totalPages, onPrev, onNext }) => (
         <PaginationButton onClick={onPrev} disabled={currentPage === 1}>
             ← Anterior
         </PaginationButton>
-
-        <span className="font-semibold text-lg text-white">
-            Página {currentPage} de {totalPages}
-        </span>
-
-        <PaginationButton
-            onClick={onNext}
-            disabled={currentPage === totalPages}
-        >
+        <span className="font-semibold text-lg text-white">Página {currentPage} de {totalPages}</span>
+        <PaginationButton onClick={onNext} disabled={currentPage === totalPages}>
             Siguiente →
         </PaginationButton>
     </div>
