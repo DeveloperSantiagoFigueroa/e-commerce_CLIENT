@@ -18,7 +18,7 @@ const Products = ({ category }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(ITEMS_PER_PAGE.lg);
 
-    // ✅ Fetch de productos dinámico (todos o por categoría)
+    // Fetch de productos dinámico (todos o por categoría)
     useEffect(() => {
         const fetchProducts = async () => {
             setLoading(true);
@@ -35,7 +35,7 @@ const Products = ({ category }) => {
         fetchProducts();
     }, [category]); // Se ejecuta cada vez que cambia la categoría
 
-    // 📌 Cambiar cantidad de productos según el tamaño de pantalla
+    //  Cambiar cantidad de productos según el tamaño de pantalla
     useEffect(() => {
         const updateItemsPerPage = () => {
             const width = window.innerWidth;
@@ -50,7 +50,7 @@ const Products = ({ category }) => {
         return () => window.removeEventListener('resize', updateItemsPerPage);
     }, []);
 
-    // 📌 Paginación
+    //  Paginación
     const totalPages = Math.ceil(products.length / itemsPerPage);
     const start = (currentPage - 1) * itemsPerPage;
     const currentProducts = products.slice(start, start + itemsPerPage);
@@ -76,7 +76,7 @@ const Products = ({ category }) => {
     );
 };
 
-// **📌 Componente de la grilla de productos**
+// ** Componente de la grilla de productos**
 const ProductGrid = ({ products }) => (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {products.map((product) => (
@@ -85,7 +85,7 @@ const ProductGrid = ({ products }) => (
     </div>
 );
 
-// **📌 Componente de tarjeta de producto**
+// ** Componente de tarjeta de producto**
 const ProductCard = ({ product }) => {
     const navigate = useNavigate();
     const { addToCart, toggleFavorite, favorites } = useContext(AuthContext);
@@ -127,7 +127,7 @@ const ProductCard = ({ product }) => {
     );
 };
 
-// **📌 Componente de paginación**
+// ** Componente de paginación**
 const Pagination = ({ currentPage, totalPages, onPrev, onNext }) => (
     <div className="flex justify-center items-center mt-6 space-x-4">
         <PaginationButton onClick={onPrev} disabled={currentPage === 1}>
@@ -140,7 +140,7 @@ const Pagination = ({ currentPage, totalPages, onPrev, onNext }) => (
     </div>
 );
 
-// **📌 Botón de paginación reutilizable**
+// ** Botón de paginación reutilizable**
 const PaginationButton = ({ onClick, disabled, children }) => (
     <button
         className={`px-4 py-2 rounded ${
