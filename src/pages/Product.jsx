@@ -5,7 +5,9 @@ import { getProductsFetch } from '../api/getProductsFetch';
 import { AuthContext } from '../context/AuthContext';
 
 const Product = () => {
-    const { favorites, toggleFavorite, addToCart } = useContext(AuthContext); // ✅ Obtiene `addToCart`
+    const { user, favorites, toggleFavorite, addToCart } =
+        useContext(AuthContext);
+    const [showModal, setShowModal] = useState(false);
     const { id } = useParams();
     const navigate = useNavigate();
     const [product, setProduct] = useState(null);
@@ -41,12 +43,20 @@ const Product = () => {
     }, [id]);
 
     const handleFavoriteClick = async () => {
+        if (!user) {
+            setShowModal(true);
+            return;
+        }
         await toggleFavorite(id);
     };
 
     // ✅ Función para agregar manualmente al carrito
     const handleAddToCart = async () => {
         if (!product) return; // Si el producto aún no ha cargado, no hacer nada
+        if (!user) {
+            setShowModal(true);
+            return;
+        }
         await addToCart(product._id); // ✅ Agregar el producto al carrito
     };
 
@@ -133,9 +143,10 @@ const Product = () => {
                     </p>
 
                     {/* ✅ Botón para agregar al carrito */}
-                    <button 
-                        onClick={handleAddToCart} 
-                        className="bg-green-500 hover:bg-green-600 rounded-[8px] text-white px-4 py-3 cursor-pointer transition-all">
+                    <button
+                        onClick={handleAddToCart}
+                        className="bg-green-500 hover:bg-green-600 rounded-[8px] text-white px-4 py-3 cursor-pointer transition-all"
+                    >
                         Agregar al carrito
                     </button>
                 </div>
@@ -170,6 +181,33 @@ const Product = () => {
                     ))}
                 </div>
             </div>
+
+            {showModal && (
+                <div className="fixed inset-0 bg-opacity-50 flex justify-center items-center z-50">
+                    <div
+                        className="relative bg-white p-6 rounded-lg shadow-lg max-w-sm text-center"
+                        onClick={(event) => event.stopPropagation()}
+                    >
+                        <button
+                            className="absolute top-2 right-2 text-red-500 hover:text-red-800 text-2xl"
+                            onClick={(event) => {
+                                event.stopPropagation();
+                                setShowModal(false);
+                            }}
+                        >
+                            &times;
+                        </button>
+
+                        <h2 className="text-xl font-bold mb-4">
+                            🚀 ¡Accede a tu cuenta!
+                        </h2>
+                        <p className="text-gray-600 mb-4">
+                            Necesitas una cuenta para agregar productos a tu
+                            carrito.
+                        </p>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
