@@ -19,7 +19,7 @@ const Layout = () => {
 
     const openLoginModal = () => {
         setIsLoginModalOpen(true);
-        setIsMenuOpen(false); // 👈 Añade esta línea
+        setIsMenuOpen(false); 
     };
     const closeLoginModal = () => setIsLoginModalOpen(false);
 

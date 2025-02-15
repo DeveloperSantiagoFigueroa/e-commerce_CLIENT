@@ -90,7 +90,7 @@ const Navbar = ({
                 </Link>
             </div>
 
-            {/* 🔍 Búsqueda con expansión y resultados dinámicos */}
+            {/* Búsqueda con expansión y resultados dinámicos */}
             <div ref={searchRef} className="relative">
                 <div
                     className={`p-1 overflow-hidden ${
@@ -110,7 +110,7 @@ const Navbar = ({
                     />
                 </div>
 
-                {/* 🔽 Resultados de búsqueda */}
+                {/* Resultados de búsqueda */}
                 {searchTerm && (
                     <div className="absolute bg-white shadow-lg w-full max-h-60 overflow-y-auto mt-1 z-50 rounded">
                         {filteredProducts.length > 0 ? (
