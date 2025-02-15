@@ -17,7 +17,7 @@ const Cart = () => {
             try {
                 const token = localStorage.getItem('token');
                 const response = await fetch(
-                    'http://localhost:5000/api/user/cart',
+                    'https://e-commerce-server-stkl.onrender.com/api/user/cart',
                     {
                         method: 'GET',
                         headers: { Authorization: token },
