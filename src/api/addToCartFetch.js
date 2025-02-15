@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/user/cart"; // Ajusta la URL si es necesario
+const API_URL = "https://e-commerce-client-sable.vercel.app/api/user/cart"; // Ajusta la URL si es necesario
 
 export const addToCartFetch = async (productId) => {
     const token = localStorage.getItem("token");

@@ -1,7 +1,7 @@
 export const getFavoritesFetch = async () => {
     const token = localStorage.getItem('token');
 
-    const response = await fetch('http://localhost:5000/api/user/favorite', {
+    const response = await fetch('https://e-commerce-client-sable.vercel.app/api/user/favorite', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -16,7 +16,7 @@ export const getFavoritesFetch = async () => {
 export const addFavouriteFetch = async (productId) => {
     const token = localStorage.getItem("token");
 
-    const response = await fetch("http://localhost:5000/api/user/favorite", { 
+    const response = await fetch("https://e-commerce-client-sable.vercel.app/api/user/favorite", { 
         method: "POST",
         headers: {
             "Content-Type": "application/json",

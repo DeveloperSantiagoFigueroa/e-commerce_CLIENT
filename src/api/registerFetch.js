@@ -1,5 +1,5 @@
 export const registerFetch = async (data) => {
-    const url = 'http://localhost:5000/api/auth/register';
+    const url = 'https://e-commerce-client-sable.vercel.app/api/auth/register';
 
     const params = {
         method: 'POST',
