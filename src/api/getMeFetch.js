@@ -1,5 +1,5 @@
 export const getMeFetch = async (token) => {
-    const response = await fetch("https://e-commerce-client-sable.vercel.app/api/user/me", {
+    const response = await fetch("https://e-commerce-server-stkl.onrender.com/api/user/me", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

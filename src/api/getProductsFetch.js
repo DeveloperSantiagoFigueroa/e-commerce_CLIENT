@@ -1,5 +1,5 @@
 export const getProductsFetch = async () => {
-    const url = "https://e-commerce-client-sable.vercel.app/api/products";
+    const url = "https://e-commerce-server-stkl.onrender.com/api/products";
     const params = {
         method: "GET",
         headers: {

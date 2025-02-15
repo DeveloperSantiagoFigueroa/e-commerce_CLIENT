@@ -1,5 +1,5 @@
 export const forgotPasswordFetch = async (data) => {
-    const response = await fetch("https://e-commerce-client-sable.vercel.app/api/auth/forgot-password", { // Asegúrate de que esta ruta es correcta
+    const response = await fetch("https://e-commerce-server-stkl.onrender.com/api/auth/forgot-password", { // Asegúrate de que esta ruta es correcta
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

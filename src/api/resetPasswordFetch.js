@@ -1,7 +1,7 @@
 export const resetPasswordFetch = async ({ token, password }) => {
     console.log("🔹 Enviando solicitud con token:", token); // 👈 Verificar que el token es correcto
     try {
-        const response = await fetch("https://e-commerce-client-sable.vercel.app/api/auth/reset-password", {
+        const response = await fetch("https://e-commerce-server-stkl.onrender.com/api/auth/reset-password", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

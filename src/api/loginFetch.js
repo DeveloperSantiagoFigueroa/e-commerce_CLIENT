@@ -1,5 +1,5 @@
 export const loginFetch = async (data) => {
-    const url = 'https://e-commerce-client-sable.vercel.app/api/auth/login';
+    const url = 'https://e-commerce-server-stkl.onrender.com/api/auth/login';
 
     const params = {
         method: 'POST',

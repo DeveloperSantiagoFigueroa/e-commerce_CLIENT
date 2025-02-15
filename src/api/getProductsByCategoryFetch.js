@@ -1,5 +1,5 @@
 export const getProductsByCategoryFetch = async (category) => {
-    const url = `https://e-commerce-client-sable.vercel.app/api/products/category/${category}`;
+    const url = `https://e-commerce-server-stkl.onrender.com/api/products/category/${category}`;
     
     try {
         const response = await fetch(url, {
