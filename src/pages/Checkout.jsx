@@ -66,21 +66,16 @@ const Checkout = () => {
     const handlePayment = (e) => {
         e.preventDefault();
         if (!validateForm()) return;
-
+    
         setLoading(true);
         setTimeout(() => {
-            const isPaymentSuccessful = Math.random() > 0.5;
-            if (isPaymentSuccessful) {
-                setPaymentStatus("success");
-                alert("Pago realizado con éxito ✅");
-                clearCart();
-            } else {
-                setPaymentStatus("error");
-                alert("Error en el pago ❌. Inténtalo de nuevo.");
-            }
+            setPaymentStatus("success");
+            alert("Pago realizado con éxito ✅");
+            clearCart();
             setLoading(false);
         }, 2000);
     };
+    
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
